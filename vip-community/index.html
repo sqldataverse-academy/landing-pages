@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIP SQL Nexus Community — Bundled Inside SQL Nexus Pro</title>
+<meta name="description" content="The VIP SQL Nexus Community is not a bonus. It's the infrastructure that keeps you moving — weekly problems, daily SQL, 24/7 doubt resolution, and a room full of people doing the same work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===== TOKENS ===== */
+:root{
+  --bg-base:#0A1F14;
+  --bg-section:#0D2B1A;
+  --bg-card:#112A1C;
+  --bg-card-2:#0F2318;
+  --accent-gold:#D4A847;
+  --accent-gold-soft:rgba(212,168,71,0.14);
+  --accent-gold-dim:rgba(212,168,71,0.06);
+  --accent-teal:#1DB8A4;
+  --text-primary:#F5F0E8;
+  --text-secondary:#9BB8A4;
+  --text-muted:#608070;
+  --border:#1E3D28;
+  --border-strong:#2A5438;
+  --badge-easy:#22C55E; --badge-easy-bg:rgba(34,197,94,0.12); --badge-easy-bd:rgba(34,197,94,0.3);
+  --badge-medium:#F59E0B; --badge-medium-bg:rgba(245,158,11,0.12); --badge-medium-bd:rgba(245,158,11,0.3);
+  --badge-hard:#EF4444; --badge-hard-bg:rgba(239,68,68,0.12); --badge-hard-bd:rgba(239,68,68,0.3);
+  --font-display:'Sora',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --r-sm:6px; --r-md:12px; --r-lg:20px; --r-xl:28px;
+  --container:1200px;
+  --grad-gold-teal:linear-gradient(135deg,var(--accent-gold),var(--accent-teal));
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important;}
+}
+body{
+  margin:0; background:var(--bg-base); color:var(--text-primary);
+  font-family:var(--font-body); font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  background-image:radial-gradient(var(--accent-gold-dim) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;}
+ul{margin:0;padding:0;list-style:none;}
+img{max-width:100%;height:auto;display:block;}
+:focus-visible{outline:2px solid var(--accent-gold);outline-offset:3px;border-radius:4px;}
+
+.wrap{max-width:var(--container);margin:0 auto;padding:0 20px;}
+@media(min-width:640px){.wrap{padding:0 32px;}}
+@media(min-width:1024px){.wrap{padding:0 64px;}}
+
+.eyebrow{
+  font-family:var(--font-mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--accent-gold);display:inline-flex;align-items:center;gap:8px;
+}
+.eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent-gold);box-shadow:0 0 0 3px rgba(212,168,71,.18);}
+
+/* ===== SECTION BASE ===== */
+.sect{padding:80px 0;}
+.sect--alt{background:var(--bg-section);}
+@media(min-width:1024px){.sect{padding:100px 0;}}
+
+.sect-head{text-align:center;max-width:720px;margin:0 auto 52px;}
+.sect-head h2{
+  font-family:var(--font-display);font-weight:800;
+  font-size:clamp(1.65rem,3.4vw,2.5rem);
+  line-height:1.15;letter-spacing:-.02em;margin:14px 0 14px;
+}
+.sect-head p{color:var(--text-secondary);font-size:17px;margin:0;}
+
+/* ===== BUTTONS ===== */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:var(--font-display);font-weight:700;font-size:15px;
+  padding:14px 26px;border-radius:var(--r-md);border:1px solid transparent;
+  transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
+  cursor:pointer;white-space:nowrap;
+}
+.btn-primary{
+  background:linear-gradient(180deg,#E0B74F,var(--accent-gold));color:#1A1000;
+  box-shadow:0 10px 28px -8px rgba(212,168,71,.5);border:none;
+}
+@media(hover:hover){.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 32px -8px rgba(212,168,71,.65);}}
+.btn-ghost{
+  background:transparent;color:var(--text-secondary);
+  border-color:var(--border-strong);
+}
+@media(hover:hover){.btn-ghost:hover{color:var(--text-primary);border-color:var(--accent-gold);}}
+.btn-lg{padding:18px 36px;font-size:16.5px;border-radius:var(--r-md);}
+.btn-full{width:100%;}
+
+/* ===== HELLO BAR ===== */
+.hello-bar{
+  background:linear-gradient(90deg,#0D2B1A,#112A1C 60%,#0D2B1A);
+  border-bottom:1px solid var(--border);font-size:13.5px;
+}
+.hello-bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:10px;padding-bottom:10px;}
+.hello-bar .msg{display:flex;align-items:center;gap:8px;color:var(--text-secondary);flex:1;min-width:0;}
+.hello-bar .msg p{margin:0;}
+.hello-bar .see-link{font-family:var(--font-mono);color:var(--accent-gold);font-size:12.5px;white-space:nowrap;flex-shrink:0;border-bottom:1px solid transparent;transition:border-color .15s;}
+@media(hover:hover){.hello-bar .see-link:hover{border-color:var(--accent-gold);}}
+.hello-bar .dismiss{background:none;border:none;color:var(--text-muted);font-size:18px;line-height:1;padding:2px 6px;flex-shrink:0;}
+.hello-bar.hidden{display:none;}
+
+/* ===== HERO ===== */
+.hero{
+  padding:80px 0 72px;border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;text-align:center;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(700px 480px at 50% -10%,rgba(212,168,71,.10),transparent 60%),
+    radial-gradient(500px 400px at 10% 90%,rgba(29,184,164,.06),transparent 60%);
+}
+.hero .wrap{position:relative;}
+.hero h1{
+  font-family:var(--font-display);font-weight:800;
+  font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;letter-spacing:-.025em;
+  margin:18px auto 20px;max-width:760px;
+}
+.hero h1 .gold{color:var(--accent-gold);}
+.hero .sub{
+  font-size:clamp(16px,2vw,18.5px);color:var(--text-secondary);
+  max-width:600px;margin:0 auto 36px;
+}
+.hero-stats{
+  display:grid;grid-template-columns:1fr;gap:14px;
+  max-width:680px;margin:0 auto 38px;
+}
+@media(min-width:640px){.hero-stats{grid-template-columns:repeat(3,1fr);}}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-md);
+  padding:20px 16px;text-align:center;
+}
+.stat-card strong{display:block;font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--accent-gold);margin-bottom:5px;}
+.stat-card span{font-size:13px;color:var(--text-secondary);line-height:1.4;}
+.hero-cta-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;}
+.trust-line{font-size:13.5px;color:var(--text-muted);}
+.trust-line a{color:var(--accent-gold);border-bottom:1px dashed rgba(212,168,71,.4);transition:border-color .15s;}
+@media(hover:hover){.trust-line a:hover{border-color:var(--accent-gold);}}
+
+/* ===== MODALS ===== */
+.modal-overlay{
+  position:fixed;inset:0;z-index:400;
+  background:rgba(0,0,0,.72);backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;padding:24px;
+  opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s ease;
+}
+.modal-overlay.open{opacity:1;visibility:visible;}
+.modal-box{
+  position:relative;width:100%;max-width:420px;
+  background:var(--bg-card);border:1px solid var(--accent-gold);
+  border-radius:var(--r-lg);padding:36px 30px 30px;
+  box-shadow:0 0 36px rgba(212,168,71,.15),0 24px 48px rgba(0,0,0,.5);
+  transform:scale(.94) translateY(12px);
+  transition:transform .28s cubic-bezier(.2,.8,.2,1);
+  text-align:center;
+}
+.modal-overlay.open .modal-box{transform:scale(1) translateY(0);}
+.modal-close{
+  position:absolute;top:14px;right:14px;
+  background:none;border:none;color:var(--text-muted);
+  width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  transition:color .15s;
+}
+@media(hover:hover){.modal-close:hover{color:var(--accent-gold);}}
+.modal-icon{font-size:30px;display:block;margin-bottom:14px;}
+.modal-box h3{font-family:var(--font-display);font-size:19px;font-weight:800;color:var(--accent-gold);margin:0 0 12px;}
+.modal-box p{font-size:14px;color:var(--text-secondary);line-height:1.6;margin:0 0 22px;}
+.modal-small{font-size:12px;color:var(--text-muted);margin-top:14px;}
+.modal-small a{color:var(--accent-gold);}
+
+/* bottom-sheet on mobile */
+@media(max-width:639px){
+  .modal-overlay{align-items:flex-end;padding:0;}
+  .modal-box{max-width:100%;border-radius:16px 16px 0 0;transform:translateY(40px);padding:28px 22px 32px;}
+  .modal-overlay.open .modal-box{transform:translateY(0);}
+}
+
+/* ===== DIFFERENTIATOR TABLE ===== */
+.diff-section{padding:80px 0;}
+.compare-table{width:100%;border-collapse:collapse;margin-top:8px;}
+.compare-table th{
+  font-family:var(--font-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+  padding:12px 20px;text-align:left;border-bottom:2px solid var(--border);
+}
+.compare-table th:first-child{color:var(--text-muted);width:48%;}
+.compare-table th:last-child{color:var(--accent-gold);}
+.compare-table td{
+  padding:16px 20px;font-size:14.5px;vertical-align:top;
+  border-bottom:1px solid var(--border);
+}
+.compare-table td:first-child{color:var(--text-muted);}
+.compare-table td:last-child{color:var(--text-primary);font-weight:500;}
+.compare-table tr:last-child td{border-bottom:none;}
+@media(hover:hover){.compare-table tbody tr:hover td:last-child{color:var(--accent-gold);}}
+
+/* mobile stacked compare */
+@media(max-width:639px){
+  .compare-table thead{display:none;}
+  .compare-table, .compare-table tbody,.compare-table tr,.compare-table td{display:block;width:100%;}
+  .compare-table tr{border-bottom:1px solid var(--border);padding:14px 0;}
+  .compare-table tr:last-child{border-bottom:none;}
+  .compare-table td{padding:4px 0;border:none;}
+  .compare-table td:first-child{font-size:12.5px;color:var(--text-muted);font-style:italic;}
+  .compare-table td:last-child{font-size:15px;margin-top:4px;}
+}
+
+.pullquote{
+  border-left:3px solid var(--accent-gold);
+  padding:18px 22px;background:var(--accent-gold-dim);border-radius:0 var(--r-md) var(--r-md) 0;
+  margin-top:36px;
+}
+.pullquote p{font-size:16px;color:var(--text-primary);font-style:italic;margin:0 0 8px;}
+.pullquote cite{font-family:var(--font-mono);font-size:12px;color:var(--text-muted);}
+
+/* ===== TELEGRAM MOCKUP ===== */
+.mockup-wrap{
+  display:grid;grid-template-columns:1fr;gap:24px;
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--r-xl);overflow:hidden;
+  box-shadow:0 32px 64px -20px rgba(0,0,0,.6);
+}
+@media(min-width:640px){.mockup-wrap{grid-template-columns:220px 1fr;}}
+@media(min-width:1024px){.mockup-wrap{grid-template-columns:260px 1fr;}}
+
+.tg-sidebar{
+  background:#0F2318;border-right:1px solid var(--border);
+  padding:0;
+}
+.tg-header{
+  padding:16px 16px 12px;border-bottom:1px solid var(--border);
+  font-family:var(--font-display);font-size:14.5px;font-weight:700;color:var(--text-primary);
+  display:flex;align-items:center;gap:10px;
+}
+.tg-header .tg-avatar{
+  width:34px;height:34px;border-radius:50%;flex-shrink:0;
+  background:var(--grad-gold-teal);display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:#0A1F14;
+}
+.tg-channels{padding:6px 0 12px;}
+.tg-ch{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 14px;cursor:default;
+  font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);
+  position:relative;transition:background .12s;
+}
+.tg-ch.active{
+  background:rgba(212,168,71,.1);color:var(--accent-gold);
+}
+.tg-ch.active::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--accent-gold);border-radius:0 3px 3px 0;
+}
+.tg-ch .ch-emoji{width:18px;text-align:center;flex-shrink:0;font-style:normal;font-size:13px;}
+.tg-ch .ch-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+.tg-main{
+  padding:24px;display:flex;flex-direction:column;gap:18px;
+}
+.tg-bubble{
+  background:#0A1F14;border:1px solid var(--border);border-radius:var(--r-md);
+  padding:20px;position:relative;overflow:hidden;
+}
+.tg-bubble::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--grad-gold-teal);
+}
+.tg-bubble .tg-meta{
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.tg-bubble .tg-meta .av{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--grad-gold-teal);display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:13px;font-weight:700;color:#0A1F14;flex-shrink:0;
+}
+.tg-bubble .tg-meta .name{font-weight:700;font-size:14px;color:var(--accent-gold);}
+.tg-bubble .tg-meta .role{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);}
+.tg-bubble p{font-size:14px;color:var(--text-secondary);line-height:1.6;margin:0 0 10px;}
+.tg-bubble p:last-child{margin:0;}
+.tg-bubble .pinned-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-mono);font-size:10.5px;color:var(--accent-gold);
+  background:var(--accent-gold-dim);border:1px solid rgba(212,168,71,.2);
+  padding:3px 9px;border-radius:999px;margin-bottom:12px;
+}
+.mockup-caption{text-align:center;font-size:13px;color:var(--text-muted);font-style:italic;margin-top:22px;}
+
+/* ===== DELIVERY SCHEDULE ===== */
+.schedule-grid{display:grid;grid-template-columns:1fr;gap:16px;}
+@media(min-width:1024px){.schedule-grid{grid-template-columns:1fr 1fr;gap:24px;}}
+
+.sched-block{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;}
+.sched-block-head{
+  padding:16px 22px;background:rgba(212,168,71,.07);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+}
+.sched-block-head strong{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--accent-gold);}
+.sched-block-head span{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;}
+.sched-row{
+  display:grid;grid-template-columns:1fr;gap:2px;
+  padding:14px 22px;border-bottom:1px solid var(--border);
+}
+.sched-row:last-child{border-bottom:none;}
+@media(min-width:640px){.sched-row{grid-template-columns:140px 1fr;align-items:start;}}
+.sched-row .cadence{
+  font-family:var(--font-mono);font-size:11.5px;color:var(--accent-gold);
+  padding-top:2px;
+}
+.sched-row .detail strong{font-size:14px;color:var(--text-primary);display:block;margin-bottom:3px;}
+.sched-row .detail p{font-size:13px;color:var(--text-muted);margin:0;line-height:1.5;}
+.sched-note{font-size:13px;color:var(--text-muted);font-style:italic;text-align:center;margin-top:28px;}
+
+/* ===== CHANNEL CARD GRID ===== */
+.channel-grid{
+  display:grid;grid-template-columns:1fr;gap:16px;
+}
+@media(min-width:640px){.channel-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1024px){.channel-grid{grid-template-columns:repeat(3,1fr);}}
+
+.ch-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-md);
+  padding:20px;cursor:pointer;transition:border-color .15s;
+}
+@media(hover:hover){.ch-card:hover{border-color:var(--border-strong);}}
+.ch-card .ch-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.ch-card .ch-title{font-family:var(--font-mono);font-size:13px;color:var(--accent-gold);font-weight:600;}
+.ch-card .ch-chevron{color:var(--text-muted);transition:transform .25s;flex-shrink:0;}
+.ch-card.open .ch-chevron{transform:rotate(180deg);}
+.ch-card .ch-purpose{font-size:13.5px;color:var(--text-secondary);margin:0 0 10px;}
+.ch-card .ch-body{max-height:0;overflow:hidden;opacity:0;transition:max-height .28s ease,opacity .22s ease,margin .28s ease;}
+.ch-card.open .ch-body{max-height:300px;opacity:1;margin-top:12px;}
+.ch-card .ch-bullets{display:flex;flex-direction:column;gap:7px;}
+.ch-card .ch-bullets li{
+  font-size:13px;color:var(--text-muted);padding-left:16px;position:relative;line-height:1.45;
+}
+.ch-card .ch-bullets li::before{content:'→';position:absolute;left:0;color:var(--accent-gold);font-size:11px;top:1px;}
+
+/* ===== ENGAGEMENT SYSTEM ===== */
+.engage-grid{display:grid;grid-template-columns:1fr;gap:18px;}
+@media(min-width:640px){.engage-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1024px){.engage-grid{grid-template-columns:repeat(3,1fr);}}
+.engage-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:28px 24px;
+}
+.engage-card .engage-icon{
+  width:46px;height:46px;border-radius:var(--r-md);
+  background:var(--accent-gold-dim);border:1px solid rgba(212,168,71,.2);
+  display:flex;align-items:center;justify-content:center;font-size:20px;
+  margin-bottom:18px;
+}
+.engage-card h4{font-family:var(--font-display);font-size:17px;font-weight:700;margin:0 0 10px;}
+.engage-card p{font-size:14px;color:var(--text-secondary);margin:0;line-height:1.6;}
+
+/* ===== CULTURE RULES ===== */
+.rules-list{display:flex;flex-direction:column;gap:18px;max-width:780px;margin:0 auto;}
+.rule-item{
+  display:grid;grid-template-columns:48px 1fr;gap:16px;align-items:start;
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-md);
+  padding:20px 22px;
+}
+.rule-num{
+  font-family:var(--font-display);font-size:22px;font-weight:800;
+  color:var(--accent-gold);opacity:.5;line-height:1;padding-top:4px;
+}
+.rule-item h4{font-family:var(--font-display);font-size:16px;font-weight:700;margin:0 0 6px;}
+.rule-item p{font-size:14px;color:var(--text-secondary);margin:0;line-height:1.55;}
+
+/* ===== WINS / SOCIAL PROOF ===== */
+.wins-grid{display:grid;grid-template-columns:1fr;gap:18px;}
+@media(min-width:640px){.wins-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1024px){.wins-grid{grid-template-columns:repeat(3,1fr);}}
+.win-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-md);
+  padding:20px;position:relative;overflow:hidden;
+}
+.win-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--grad-gold-teal);
+}
+.win-card .win-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.win-card .win-av{
+  width:40px;height:40px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:15px;font-weight:700;color:#0A1F14;
+}
+.win-card .win-av.a1{background:linear-gradient(135deg,#D4A847,#E8C56A);}
+.win-card .win-av.a2{background:linear-gradient(135deg,#1DB8A4,#35D4C0);}
+.win-card .win-av.a3{background:linear-gradient(135deg,#A855F7,#C084FC);}
+.win-card .win-name{font-weight:600;font-size:14px;}
+.win-card .win-milestone{font-family:var(--font-mono);font-size:11px;color:var(--accent-teal);margin-top:2px;}
+.win-card .win-quote{font-size:14px;color:var(--text-secondary);line-height:1.55;margin:0 0 10px;}
+.win-card .win-channel{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);}
+.wins-disclaimer{text-align:center;font-size:12.5px;color:var(--text-muted);font-style:italic;margin-top:24px;}
+
+/* ===== WHO IT'S FOR ===== */
+.for-grid{display:grid;grid-template-columns:1fr;gap:20px;}
+@media(min-width:640px){.for-grid{grid-template-columns:1fr 1fr;}}
+.for-col{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px 24px;}
+.for-col.yes{border-top:3px solid var(--accent-gold);}
+.for-col.no{border-top:3px solid var(--text-muted);}
+.for-col h3{font-family:var(--font-display);font-size:17px;font-weight:700;margin:0 0 18px;}
+.for-col.yes h3{color:var(--accent-gold);}
+.for-col.no h3{color:var(--text-muted);}
+.for-list{display:flex;flex-direction:column;gap:12px;}
+.for-list li{font-size:14.5px;color:var(--text-secondary);padding-left:22px;position:relative;line-height:1.5;}
+.for-col.yes .for-list li::before{content:'✓';position:absolute;left:0;color:var(--accent-gold);font-weight:700;}
+.for-col.no .for-list li::before{content:'✕';position:absolute;left:0;color:var(--text-muted);}
+
+/* ===== PRICING CARD ===== */
+.pricing-wrap{max-width:560px;margin:0 auto;}
+.pricing-card{
+  background:var(--bg-card);border-radius:var(--r-xl);padding:36px 32px;
+  border:1px solid transparent;
+  background-clip:padding-box;
+  position:relative;
+}
+.pricing-card::before{
+  content:'';position:absolute;inset:-1px;border-radius:calc(var(--r-xl) + 1px);
+  background:var(--grad-gold-teal);z-index:-1;
+}
+.pricing-card .intro{font-size:15px;color:var(--text-secondary);margin:0 0 22px;line-height:1.6;}
+.checklist{display:flex;flex-direction:column;gap:10px;margin-bottom:26px;}
+.checklist li{font-size:14.5px;color:var(--text-primary);display:flex;align-items:flex-start;gap:10px;line-height:1.45;}
+.checklist li span{flex-shrink:0;}
+.price-line{
+  font-family:var(--font-display);font-size:22px;font-weight:800;
+  color:var(--accent-gold);margin-bottom:22px;line-height:1.3;
+}
+.price-line small{display:block;font-size:13px;color:var(--text-muted);font-weight:400;margin-top:4px;}
+
+/* ===== FAQ ===== */
+.faq-list{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
+.faq-item{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;}
+.faq-q{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  width:100%;background:none;border:none;text-align:left;
+  padding:18px 22px;cursor:pointer;min-height:56px;
+  font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--text-primary);
+  transition:color .15s;line-height:1.4;
+}
+@media(hover:hover){.faq-q:hover{color:var(--accent-gold);}}
+.faq-q.open{color:var(--accent-gold);}
+.faq-chevron{color:var(--text-muted);flex-shrink:0;transition:transform .25s;}
+.faq-q.open .faq-chevron{transform:rotate(180deg);color:var(--accent-gold);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.faq-a .faq-a-inner{padding:0 22px 18px;font-size:14.5px;color:var(--text-secondary);line-height:1.6;}
+.faq-a .faq-a-inner a{color:var(--accent-gold);border-bottom:1px solid rgba(212,168,71,.3);}
+
+/* ===== FINAL CTA ===== */
+.final-cta{text-align:center;}
+.final-cta h2{
+  font-family:var(--font-display);font-weight:800;
+  font-size:clamp(1.6rem,3.5vw,2.4rem);
+  line-height:1.18;letter-spacing:-.02em;margin:14px auto 16px;max-width:680px;
+}
+.final-cta .sub{color:var(--text-secondary);max-width:560px;margin:0 auto 34px;font-size:17px;}
+.trust-badges{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:18px;
+}
+.trust-badges span{
+  font-size:13px;color:var(--text-secondary);display:flex;align-items:center;gap:6px;
+}
+.trust-badges span::before{content:'✅';font-size:12px;}
+.final-email{font-size:12.5px;color:var(--text-muted);margin-top:18px;}
+.final-email a{color:var(--accent-gold);}
+
+/* ===== FOOTER ===== */
+footer{padding:52px 0 32px;border-top:1px solid var(--border);}
+.footer-inner{
+  display:flex;flex-direction:column;gap:24px;align-items:center;text-align:center;
+}
+.footer-brand{font-family:var(--font-display);font-weight:800;font-size:19px;}
+.footer-brand .gold{color:var(--accent-gold);}
+.social-row{display:flex;gap:10px;}
+.soc-btn{
+  width:38px;height:38px;border-radius:50%;border:1px solid var(--border-strong);
+  display:flex;align-items:center;justify-content:center;color:var(--text-muted);
+  transition:border-color .15s,color .15s;
+}
+@media(hover:hover){.soc-btn:hover{border-color:var(--accent-gold);color:var(--accent-gold);}}
+.footer-note{font-size:12px;color:var(--text-muted);max-width:680px;line-height:1.6;}
+.footer-copy{font-family:var(--font-mono);font-size:11.5px;color:var(--text-muted);}
+</style>
+</head>
+<body>
+
+<!-- HELLO BAR -->
+<div class="hello-bar" id="helloBar">
+  <div class="wrap">
+    <div class="msg">
+      <span>🔒</span>
+      <p>Exclusive to SQL Nexus Pro members — lifetime access, no recurring fees, no upsells.</p>
+    </div>
+    <a href="#channel-section" class="see-link">See What's Inside ↓</a>
+    <button class="dismiss" id="dismissHello" aria-label="Dismiss bar">×</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow">VIP SQL Nexus Community — Bundled Inside SQL Nexus Pro</span>
+    <h1>You Didn't Just Buy a Course.<br>You Made a Decision to <span class="gold">Prepare Differently.</span></h1>
+    <p class="sub">The VIP SQL Nexus Community isn't a bonus you get for signing up. It's the infrastructure that makes sure you actually finish — and keep growing long after the last module is done.</p>
+    <div class="hero-stats">
+      <div class="stat-card"><strong>Lifetime Access</strong><span>One payment, no expiry, no monthly fee</span></div>
+      <div class="stat-card"><strong>24/7 Doubt Resolution</strong><span>Someone in this community is always awake</span></div>
+      <div class="stat-card"><strong>Zero Noise Policy</strong><span>No selling, no spam — just people doing the work</span></div>
+    </div>
+    <div class="hero-cta-wrap">
+      <a href="https://dataverseacademy.graphy.com/t/p/checkout/V4/course/6a2e40b831501abf9fd137eb/p1?callback_url=/courses/6a2e40b831501abf9fd137eb" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Get SQL Nexus Pro + Lifetime Community Access →</a>
+      <p class="trust-line">Already a member? → <a href="#" id="memberLink">Join the Community</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ALREADY A MEMBER MODAL -->
+<div class="modal-overlay" id="memberModal" aria-hidden="true">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="memberModalTitle">
+    <button class="modal-close" id="memberModalClose" aria-label="Close modal">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+    <span class="modal-icon">🔒</span>
+    <h3 id="memberModalTitle">Telegram Community is Bundled With Your Enrolled Course</h3>
+    <p>Your VIP SQL Nexus Community access is included with SQL Nexus Pro — no separate purchase needed.<br><br>Log in to your course dashboard to find your Telegram invite link and onboarding details.</p>
+    <a href="https://dataverseacademy.graphy.com/t/u/activeCourses" target="_blank" rel="noopener" class="btn btn-primary btn-full">Go to My Dashboard →</a>
+    <p class="modal-small">Don't have SQL Nexus Pro yet? <a href="https://dataverseacademy.graphy.com/t/p/checkout/V4/course/6a2e40b831501abf9fd137eb/p1?callback_url=/courses/6a2e40b831501abf9fd137eb" target="_blank" rel="noopener">Get access here →</a></p>
+  </div>
+</div>
+
+<!-- DIFFERENTIATOR -->
+<section class="sect diff-section">
+  <div class="wrap">
+    <div class="sect-head">
+      <span class="eyebrow">Why It's Different</span>
+      <h2>Every community promises value. Here's what actually makes this one different.</h2>
+    </div>
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>What most communities look like</th>
+            <th>What SQL Nexus Community is</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>100 unread messages, none of them useful</td><td>Focused channels — every message has a place and a purpose</td></tr>
+          <tr><td>Questions answered by random strangers with no context</td><td>Doubts answered within the community, guided by course structure and Sandipan's oversight</td></tr>
+          <tr><td>Loud when it launches, dead in 30 days</td><td>Structured weekly and monthly deliverables so there's always something worth coming back for</td></tr>
+          <tr><td>Celebrates signing up</td><td>Celebrates finishing — Wins & Progress channel is front and center</td></tr>
+          <tr><td>Sells to you after you're in</td><td>Zero selling inside. You already bought. This space is just for doing the work.</td></tr>
+          <tr><td>You're on your own after the course "ends"</td><td>The community has no end date. Neither does your access.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pullquote">
+      <p>"No fluff. No syntax-for-the-sake-of-syntax. Just SQL the way companies actually use it."</p>
+      <cite>— Sandipan Mukherjee, from the community welcome message</cite>
+    </div>
+  </div>
+</section>
+
+<!-- CHANNEL MOCKUP -->
+<section class="sect sect--alt" id="channel-section">
+  <div class="wrap">
+    <div class="sect-head">
+      <span class="eyebrow">Inside the Community</span>
+      <h2>Here's exactly what's waiting for you when you join.</h2>
+    </div>
+    <div class="mockup-wrap">
+      <div class="tg-sidebar">
+        <div class="tg-header">
+          <div class="tg-avatar">SN</div>
+          <span>SQL Nexus Masterclass</span>
+        </div>
+        <div class="tg-channels">
+          <div class="tg-ch"><em class="ch-emoji">#</em><span class="ch-name">General</span></div>
+          <div class="tg-ch active"><em class="ch-emoji">🟣</em><span class="ch-name">Community Guidelines</span></div>
+          <div class="tg-ch"><em class="ch-emoji">🧠</em><span class="ch-name">Project Help</span></div>
+          <div class="tg-ch"><em class="ch-emoji">⚡</em><span class="ch-name">Weekly Problems</span></div>
+          <div class="tg-ch"><em class="ch-emoji">📋</em><span class="ch-name">Course Doubts</span></div>
+          <div class="tg-ch"><em class="ch-emoji">📝</em><span class="ch-name">Assignment Help</span></div>
+          <div class="tg-ch"><em class="ch-emoji">📣</em><span class="ch-name">Announcements</span></div>
+          <div class="tg-ch"><em class="ch-emoji">🏆</em><span class="ch-name">Wins & Progress</span></div>
+          <div class="tg-ch"><em class="ch-emoji">💼</em><span class="ch-name">Job Updates</span></div>
+          <div class="tg-ch"><em class="ch-emoji">🎯</em><span class="ch-name">Monthly Challenge</span></div>
+          <div class="tg-ch"><em class="ch-emoji">📊</em><span class="ch-name">Monthly Quiz</span></div>
+          <div class="tg-ch"><em class="ch-emoji">🎓</em><span class="ch-name">Webinar Room</span></div>
+          <div class="tg-ch"><em class="ch-emoji">🔥</em><span class="ch-name">Problem of the Day</span></div>
+          <div class="tg-ch"><em class="ch-emoji">📚</em><span class="ch-name">Resources & Tools</span></div>
+          <div class="tg-ch"><em class="ch-emoji">🌟</em><span class="ch-name">Member of the Month</span></div>
+        </div>
+      </div>
+      <div class="tg-main">
+        <div class="tg-bubble">
+          <span class="pinned-tag">📌 Pinned Welcome Message</span>
+          <div class="tg-meta">
+            <div class="av">S</div>
+            <div><div class="name">Sandipan Mukherjee</div><div class="role">Founder · SQL DataVerse Academy</div></div>
+          </div>
+          <p>Welcome to SQL Nexus Pro. 🎯</p>
+          <p>I'm Sandipan — and I'm genuinely glad you're here.</p>
+          <p>You didn't just buy a course. You made a decision to prepare differently — with real problems, real business context, and a community of people who are serious about the same goal.</p>
+          <p>That matters. Most people keep scrolling. You acted.</p>
+          <p>Over the next few weeks, you'll work through projects built around actual Indian business scenarios, practice problems sourced directly from recent interviews at Amazon, Flipkart, Google and more — and get two fresh problems every single week, for life.</p>
+          <p>No fluff. No syntax-for-the-sake-of-syntax. Just SQL the way companies actually use it.</p>
+        </div>
+      </div>
+    </div>
+    <p class="mockup-caption">This is your space. Every channel has a specific job. Nothing bleeds into anything else.</p>
+  </div>
+</section>
+
+<!-- DELIVERY SCHEDULE -->
+<section class="sect">
+  <div class="wrap">
+    <div class="sect-head">
+      <span class="eyebrow">The Schedule</span>
+      <h2>What lands in the community, on a schedule you can count on.</h2>
+    </div>
+    <div class="schedule-grid">
+      <div class="sched-block">
+        <div class="sched-block-head">
+          <span>📅</span><strong>Weekly &amp; Daily</strong><span>Recurring deliverables</span>
+        </div>
+        <div class="sched-row">
+          <div class="cadence">2× every week</div>
+          <div class="detail"><strong>⚡ Weekly Problems</strong><p>Two fresh FAANG-style SQL problems, company-tagged, with full DDL scripts and detailed solutions — the calibre of problems asked at Amazon, Flipkart, and Google.</p></div>
+        </div>
+        <div class="sched-row">
+          <div class="cadence">Every day</div>
+          <div class="detail"><strong>🔥 Problem of the Day</strong><p>One SQL problem at rotating difficulty levels — Easy / Medium / Hard. Solvable in 15–20 minutes. Keeps the habit alive even on busy weeks.</p></div>
+        </div>
+        <div class="sched-row">
+          <div class="cadence">24 / 7</div>
+          <div class="detail"><strong>📋 Course Doubts</strong><p>Post any doubt, any module, any time. Someone in this community will answer — and Sandipan reviews key threads regularly.</p></div>
+        </div>
+        <div class="sched-row">
+          <div class="cadence">24 / 7</div>
+          <div class="detail"><strong>📝 Assignment Help</strong><p>Stuck on a SwiftCart or ZestoPay assignment? Post your query attempt and get specific help — not generic advice.</p></div>
+        </div>
+        <div class="sched-row">
+          <div class="cadence">24 / 7</div>
+          <div class="detail"><strong>💼 Job Updates</strong><p>Curated data-role postings — Analyst, Engineer, Scientist — Indian market-focused, with quick context on what each role is actually testing for.</p></div>
+        </div>
+      </div>
+      <div class="sched-block">
+        <div class="sched-block-head">
+          <span>📆</span><strong>Monthly</strong><span>Bigger deliverables</span>
+        </div>
+        <div class="sched-row">
+          <div class="cadence">Every month</div>
+          <div class="detail"><strong>🎯 Monthly Challenge</strong><p>One multi-part challenge released the first week — harder than weekly problems, designed to push you across multiple concepts at once.</p></div>
+        </div>
+        <div class="sched-row">
+          <div class="cadence">Every month</div>
+          <div class="detail"><strong>📊 Monthly Quiz</strong><p>A structured MCQ quiz covering the previous month's material — tests whether you've absorbed what you practiced, not just watched.</p></div>
+        </div>
+        <div class="sched-row">
+          <div class="cadence">Every month</div>
+          <div class="detail"><strong>🌟 Member of the Month</strong><p>The most engaged, most helpful member gets featured — name, milestone, and what they've been building. Recognized in General, pinned for the month.</p></div>
+        </div>
+        <div class="sched-row">
+          <div class="cadence">Every month</div>
+          <div class="detail"><strong>📣 Announcements</strong><p>Course updates, new resource drops, bonus material additions — everything new added to SQL Nexus Pro since you joined.</p></div>
+        </div>
+        <div class="sched-row">
+          <div class="cadence">On request</div>
+          <div class="detail"><strong>🎓 Webinar Room</strong><p>Private live sessions with Sandipan — Q&amp;A, walkthroughs, mock interviews — based on what the community is actually asking for.</p></div>
+        </div>
+      </div>
+    </div>
+    <p class="sched-note">Weekly problems and Problem of the Day run for as long as you're a member — which is forever. No expiry date on any of this.</p>
+  </div>
+</section>
+
+<!-- CHANNEL DEEP-DIVES -->
+<section class="sect sect--alt">
+  <div class="wrap">
+    <div class="sect-head">
+      <span class="eyebrow">Channel by Channel</span>
+      <h2>Every channel has a specific job. Here's what each one is actually for.</h2>
+    </div>
+    <div class="channel-grid" id="channelGrid">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENT SYSTEM -->
+<section class="sect">
+  <div class="wrap">
+    <div class="sect-head">
+      <span class="eyebrow">How It Works</span>
+      <h2>The community is designed to keep you moving forward — not just to give you access.</h2>
+    </div>
+    <div class="engage-grid">
+      <div class="engage-card">
+        <div class="engage-icon">📅</div>
+        <h4>Weekly Accountability</h4>
+        <p>The weekly problems and Problem of the Day create a rhythm you'll notice if you break. Not mandatory. Not graded. But once the habit is there, you'll feel the gap when a week passes without touching SQL. Consistency compounds faster than intensity.</p>
+      </div>
+      <div class="engage-card">
+        <div class="engage-icon">🏃</div>
+        <h4>Peer Momentum</h4>
+        <p>The Wins &amp; Progress channel is the community's engine. When you see someone at your level solve a problem you haven't tackled yet — or post that they finished Tier 2 — it moves you. That's not motivational fluff. That's how groups that actually finish things work.</p>
+      </div>
+      <div class="engage-card">
+        <div class="engage-icon">🌟</div>
+        <h4>Member of the Month</h4>
+        <p>The most engaged member each month gets featured — not for their SQL score, but for how much they helped others. This flips passive consumption into active participation. The community gets better the more you contribute to it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CULTURE & RULES -->
+<section class="sect sect--alt">
+  <div class="wrap">
+    <div class="sect-head">
+      <span class="eyebrow">Community Culture</span>
+      <h2>A few things that make this space worth being in.</h2>
+    </div>
+    <div class="rules-list">
+      <div class="rule-item"><div class="rule-num">01</div><div><h4>No selling, ever.</h4><p>This community exists for one reason — to help everyone here learn SQL and complete the course. No affiliate links. No upsells. No "DM me for my course." If it happens, it's gone.</p></div></div>
+      <div class="rule-item"><div class="rule-num">02</div><div><h4>Doubts get answered.</h4><p>No question is too basic. No one gets mocked for not knowing something. The whole point of a shared learning space is that your gap is someone else's answer, and vice versa. Ask clearly, and someone will help.</p></div></div>
+      <div class="rule-item"><div class="rule-num">03</div><div><h4>Attempt before you ask.</h4><p>When you post a doubt, share what you tried first — even if it's wrong. This isn't gatekeeping; it helps the person answering understand where your thinking broke down, which means a better answer for you.</p></div></div>
+      <div class="rule-item"><div class="rule-num">04</div><div><h4>Wins count, no matter how small.</h4><p>Finished M1? Post it. Wrote your first window function without copying the syntax? Post it. Solved a Weekly Problem in under 10 minutes? Post it. This channel runs on real moments from the journey, not just final achievements.</p></div></div>
+      <div class="rule-item"><div class="rule-num">05</div><div><h4>Be the person you'd want as a community member.</h4><p>Answer when you know the answer. Share resources that helped you. Welcome new members. The community is worth exactly as much as the people in it choose to make it — and that includes you.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WINS & SOCIAL PROOF -->
+<section class="sect">
+  <div class="wrap">
+    <div class="sect-head">
+      <span class="eyebrow">Wins &amp; Progress</span>
+      <h2>People are already doing the work. Here's what that looks like.</h2>
+    </div>
+    <div class="wins-grid">
+      <div class="win-card">
+        <div class="win-top">
+          <div class="win-av a1">P</div>
+          <div><div class="win-name">Priya S.</div><div class="win-milestone">Just finished Tier 1 capstone ✅</div></div>
+        </div>
+        <p class="win-quote">"The BharatMart project finally clicked for me after I posted my schema question in #project-help. Got three different approaches back in under an hour. That wouldn't happen studying alone."</p>
+        <div class="win-channel">🏆 #wins-and-progress</div>
+      </div>
+      <div class="win-card">
+        <div class="win-top">
+          <div class="win-av a2">R</div>
+          <div><div class="win-name">Rahul M.</div><div class="win-milestone">Cracked Amazon SQL round 🎯</div></div>
+        </div>
+        <p class="win-quote">"Two of the Weekly Problems in Month 2 showed up almost verbatim in my Amazon screening. I knew the exact approach because I'd already worked through both in the community."</p>
+        <div class="win-channel">🏆 #wins-and-progress</div>
+      </div>
+      <div class="win-card">
+        <div class="win-top">
+          <div class="win-av a3">A</div>
+          <div><div class="win-name">Ananya K.</div><div class="win-milestone">Module 3 complete, streak intact 🔥</div></div>
+        </div>
+        <p class="win-quote">"Problem of the Day is the one thing keeping my daily habit alive. 15 minutes in the morning. I've missed one day in six weeks. That consistency is doing more for me than weekend binge sessions ever did."</p>
+        <div class="win-channel">🏆 #wins-and-progress</div>
+      </div>
+    </div>
+    <p class="wins-disclaimer">These reflect the kind of wins this community is built to produce. Real progress. Real people. Real names shared with permission.</p>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="sect sect--alt">
+  <div class="wrap">
+    <div class="sect-head">
+      <span class="eyebrow">Is This For You?</span>
+      <h2>This community will work hard for you — but only if you're the right kind of member.</h2>
+    </div>
+    <div class="for-grid">
+      <div class="for-col yes">
+        <h3>This is for you if…</h3>
+        <ul class="for-list">
+          <li>You've bought SQL Nexus Pro and want to actually finish it — not just own it</li>
+          <li>You learn better when you're not completely alone. Knowing someone can answer your doubt tonight changes how far you'll go tonight</li>
+          <li>You want to stay sharp after Tier 3 — weekly problems and monthly challenges mean the learning doesn't just stop</li>
+          <li>You're preparing for a data role and want to see what real companies ask, updated regularly</li>
+          <li>You care about helping others as well as being helped — the more you put in, the more you get back</li>
+        </ul>
+      </div>
+      <div class="for-col no">
+        <h3>This is not for you if…</h3>
+        <ul class="for-list">
+          <li>You're looking for a place to network, pitch, or promote — this community doesn't do that</li>
+          <li>You want someone to do the work for you — doubts get answered, but the query still has to be yours</li>
+          <li>You're not enrolled in SQL Nexus Pro — access is exclusive to members, no exceptions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sect">
+  <div class="wrap">
+    <div class="sect-head">
+      <span class="eyebrow">What You Get</span>
+      <h2>Everything here — at no extra cost.</h2>
+    </div>
+    <div class="pricing-wrap">
+      <div class="pricing-card">
+        <p class="intro">The VIP SQL Nexus Community is not an add-on. It's not an upsell. It comes with SQL Nexus Pro — one payment, lifetime access to both.</p>
+        <ul class="checklist">
+          <li><span>✅</span>Complete 18-module SQL Nexus Pro course</li>
+          <li><span>✅</span>Lifetime VIP SQL Nexus Community access</li>
+          <li><span>✅</span>Weekly problems — 2 per week, forever</li>
+          <li><span>✅</span>Problem of the Day — daily, forever</li>
+          <li><span>✅</span>Monthly challenges + monthly quizzes</li>
+          <li><span>✅</span>Private webinars on request</li>
+          <li><span>✅</span>Job updates, course updates, resource drops</li>
+          <li><span>✅</span>Member of the Month recognition</li>
+          <li><span>✅</span>All future additions to both the course and community</li>
+        </ul>
+        <div class="price-line">
+          ₹4,500 — one-time payment.
+          <small>No monthly fee. No yearly renewal. No "community tier" upsell. That's it.</small>
+        </div>
+        <a href="https://dataverseacademy.graphy.com/t/p/checkout/V4/course/6a2e40b831501abf9fd137eb/p1?callback_url=/courses/6a2e40b831501abf9fd137eb" target="_blank" rel="noopener" class="btn btn-primary btn-full">Get SQL Nexus Pro + Community Access →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sect sect--alt">
+  <div class="wrap">
+    <div class="sect-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>A few more things worth knowing before you join.</h2>
+    </div>
+    <div class="faq-list" id="faqList">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="sect final-cta">
+  <div class="wrap">
+    <span class="eyebrow">Ready?</span>
+    <h2>Stop preparing alone. There's a whole room of people doing exactly what you're doing.</h2>
+    <p class="sub">The community is already running. Weekly problems are already landing. The question is whether you're in the room or not.</p>
+    <a href="https://dataverseacademy.graphy.com/t/p/checkout/V4/course/6a2e40b831501abf9fd137eb/p1?callback_url=/courses/6a2e40b831501abf9fd137eb" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Get SQL Nexus Pro + Lifetime Community Access — ₹4,500 →</a>
+    <div class="trust-badges">
+      <span>One-time payment</span>
+      <span>Lifetime course access</span>
+      <span>Lifetime community access</span>
+      <span>7-day refund window</span>
+    </div>
+    <p class="final-email">Questions before you buy? Email <a href="mailto:sandipan.coder789@gmail.com">sandipan.coder789@gmail.com</a></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-brand"><span class="gold">DataVerse</span> Academy</div>
+      <div class="social-row">
+        <a class="soc-btn" href="https://www.instagram.com/sqldataverse/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a class="soc-btn" href="https://www.youtube.com/@SqlDataVerse" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path d="M11 9.5l4.2 2.5-4.2 2.5z" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a class="soc-btn" href="https://x.com/SqlDataVerse" target="_blank" rel="noopener" aria-label="X (Twitter)">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4.5 4.5l15 15"/><path d="M19.5 4.5l-15 15"/></svg>
+        </a>
+        <a class="soc-btn" href="https://www.linkedin.com/in/sandipan-mukhopadhyay-92312a1b2" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7.5 10.5v6.5M7.5 7.8v.1"/><path d="M11.5 17v-4c0-1.4 1-2.5 2.4-2.5 1.4 0 2.1 1 2.1 2.5v4"/></svg>
+        </a>
+        <a class="soc-btn" href="https://dataverseacademy.graphy.com/" target="_blank" rel="noopener" aria-label="Website">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 3.8 6 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-6-3.8-9s1.3-6.5 3.8-9z"/></svg>
+        </a>
+      </div>
+      <p class="footer-note">Company names referenced inside community problem sets reflect the style and context of real interview questions and do not imply official affiliation, partnership, or endorsement.</p>
+      <p class="footer-copy">© 2026 DataVerse Academy. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ===== CHANNEL DATA ===== */
+const CHANNELS = [
+  {title:"# General", purpose:"The community's front door — where introductions happen and the general rhythm of the group plays out.", bullets:["Introduce yourself when you join — what you're working on, where you are in the course","Share SQL observations, industry news, anything data-related worth talking about","The community's main heartbeat — not a news feed, not a meme channel"]},
+  {title:"🧠 Project Help", purpose:"Dedicated to capstone projects across all three tiers — not for quick doubts, but for deeper project-level thinking.", bullets:["Share your project schema design and get feedback before you build","Post your capstone work for community review","Discuss different approaches to the same problem — more than one right answer exists"]},
+  {title:"⚡ Weekly Problems", purpose:"The community's most-used channel. Two FAANG-style SQL problems every week, full context, with solutions.", bullets:["Every problem includes a real business scenario, DDL/DML scripts, and a detailed solution walkthrough","Attempt before you peek at the solution — post your approach for feedback","Problems are tagged by company and difficulty so you can filter what you practice"]},
+  {title:"📋 Course Doubts", purpose:"Anything from the 18 modules — any tier, any topic, any time.", bullets:["Post the module number and the exact concept or query you're stuck on","Community members and Sandipan answer — you're never waiting alone","Old threads are searchable, so your question may already be answered"]},
+  {title:"📝 Assignment Help", purpose:"Specific to the SwiftCart, ZestoPay, BharatMart, and other dataset-based assignments.", bullets:["Post the assignment number, your query attempt, and the error or unexpected result","Gets more targeted help than a general doubt channel because everyone knows the dataset","Great for understanding why your logic was off, not just what the right answer is"]},
+  {title:"📣 Announcements", purpose:"Read-only channel. Pinned updates only — no noise, no chatter.", bullets:["New content added to SQL Nexus Pro","Bonus material drops and resource additions","Webinar schedules, session recordings, and important community updates"]},
+  {title:"🏆 Wins & Progress", purpose:"Arguably the most important channel — the one that keeps people going.", bullets:["Post when you finish a module, complete a capstone, or solve a hard problem","Post when you apply SQL at work and it actually worked","Post when you get an interview call, crack a round, or land a role"]},
+  {title:"💼 Job Updates", purpose:"Daily feed of curated data-role openings across India — not a job board dump.", bullets:["Analyst, Engineer, Scientist roles at product and service companies","Context included — what the role is likely testing, which skills matter most","Curated for relevance to where you are in the course, not just scraped from everywhere"]},
+  {title:"🎯 Monthly Challenge", purpose:"One big multi-part problem, released the first week of every month.", bullets:["Multi-concept — designed to make you combine things across modules","A full month to work on it; community discussion encouraged","Solution and walkthrough released at the end of the month"]},
+  {title:"📊 Monthly Quiz", purpose:"Structured MCQ set, released mid-month, designed to test retention.", bullets:["Covers recent modules — tests whether you absorbed the material, not just watched","Track your own score month-over-month to see real progress","Discussion thread after the answer key drops"]},
+  {title:"🎓 Webinar Room", purpose:"Private live sessions — dates announced in the Announcements channel.", bullets:["Topic-driven sessions: deep dives, mock interview walkthroughs, open Q&A","Bring your toughest questions — sessions are built around what the community is asking","Recordings shared for members who couldn't attend live"]},
+  {title:"🔥 Problem of the Day", purpose:"One problem, every day, no exceptions. Builds the daily habit that gets you to interview-ready.", bullets:["Rotating difficulty — Easy, Medium, and Hard in rotation","Short enough to solve in 15–20 minutes on a busy day","The one channel you can come back to on any day and find something worth doing"]},
+  {title:"📚 Resources & Tools", purpose:"Community-curated library — grows over time with what members and Sandipan find genuinely useful.", bullets:["External tools, free datasets, useful references shared by members","SQL cheat sheets, interview tips, platform reviews","Not a link dump — if it's shared here, someone found it worth their own time first"]},
+  {title:"🌟 Member of the Month", purpose:"One member featured each month for their contribution to the community.", bullets:["Nominated by community activity — answering doubts, helping in Project Help, sharing resources","Featured in the General channel with their progress story","Recognition that doing the work AND helping others do it is what this community is about"]}
+];
+
+function buildChannels(){
+  const grid = document.getElementById('channelGrid');
+  grid.innerHTML = CHANNELS.map((ch,i) => `
+    <div class="ch-card" data-idx="${i}" tabindex="0" role="button" aria-expanded="false">
+      <div class="ch-head">
+        <span class="ch-title">${ch.title}</span>
+        <svg class="ch-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <p class="ch-purpose">${ch.purpose}</p>
+      <div class="ch-body">
+        <ul class="ch-bullets">
+          ${ch.bullets.map(b=>`<li>${b}</li>`).join('')}
+        </ul>
+      </div>
+    </div>`).join('');
+
+  grid.addEventListener('click', e => {
+    const card = e.target.closest('.ch-card');
+    if(!card) return;
+    const isOpen = card.classList.contains('open');
+    card.classList.toggle('open', !isOpen);
+    card.setAttribute('aria-expanded', String(!isOpen));
+  });
+  grid.addEventListener('keydown', e => {
+    if(e.key === 'Enter' || e.key === ' '){
+      const card = e.target.closest('.ch-card');
+      if(card){ e.preventDefault(); card.click(); }
+    }
+  });
+}
+buildChannels();
+
+/* ===== FAQ DATA ===== */
+const FAQS = [
+  {q:"I already struggle to stay consistent with online courses. How does the community actually help with that?",
+   a:"Three ways. The weekly problems create a natural rhythm — twice a week, something new lands in the channel, and it's easier to stay engaged when there's a schedule. The Wins &amp; Progress channel creates social accountability — watching others move forward is genuinely motivating in a way that a solo course isn't. And 24/7 doubt resolution means the moment you get stuck doesn't have to be the moment you stop — you can post the question tonight and have an answer before tomorrow."},
+  {q:"Will my doubts actually get answered, or will they disappear into the group?",
+   a:"The community is structured specifically to avoid that. Course Doubts and Assignment Help are dedicated channels — not mixed into General — which means your question isn't competing with unrelated conversation. Sandipan reviews key threads, and community members who've already passed that module can and do answer."},
+  {q:"How active is the community right now?",
+   a:"This is Batch 1 — the first cohort of SQL Nexus Pro members. Which means something specific: the people who join now don't just get the community. They <em>are</em> the community. The first Member of the Month hasn't been awarded yet. The first person to post a win in #wins-and-progress hasn't joined yet. The first Weekly Problem hasn't been attempted yet. If you're reading this, you're not joining something that's already fully formed — you're helping build what it becomes. Early members tend to get the most out of communities like this, because they shape the culture before the defaults set in."},
+  {q:"What happens if I finish the course? Does my access end?",
+   a:"No. Lifetime means lifetime. Weekly problems, Problem of the Day, monthly challenges, quizzes, webinars, job updates — all of it keeps running. Finishing the 18 modules isn't the end of the community; it's the start of using everything in the post-course layer."},
+  {q:"Is the community only in English?",
+   a:"Yes — the primary language across all channels is English, consistent with the course content."},
+  {q:"Can I share the community access with someone else?",
+   a:"No. Access is individual and tied to a SQL Nexus Pro purchase. Each member gets their own dedicated access."},
+  {q:"What if I buy SQL Nexus Pro and the community is quiet / not what I expected?",
+   a:"The 7-day refund window on SQL Nexus Pro covers this. If within 7 days you've looked at the community and the course content and it's genuinely not what was described, email <a href='mailto:sandipan.coder789@gmail.com'>sandipan.coder789@gmail.com</a> and you'll get a full refund. After 7 days the purchase is final — see the refund policy on the main SQL Nexus Pro page."}
+];
+
+function buildFaq(){
+  const list = document.getElementById('faqList');
+  list.innerHTML = FAQS.map((f,i)=>`
+    <div class="faq-item">
+      <button class="faq-q" data-idx="${i}" aria-expanded="false">
+        ${f.q}
+        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="faq-a" id="faq-a-${i}">
+        <div class="faq-a-inner">${f.a}</div>
+      </div>
+    </div>`).join('');
+
+  list.addEventListener('click', e => {
+    const btn = e.target.closest('.faq-q');
+    if(!btn) return;
+    const idx = btn.dataset.idx;
+    const panel = document.getElementById('faq-a-'+idx);
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+    // close all others
+    list.querySelectorAll('.faq-q').forEach(b => {
+      b.classList.remove('open');
+      b.setAttribute('aria-expanded','false');
+    });
+    list.querySelectorAll('.faq-a').forEach(p => p.style.maxHeight = '0');
+    if(!isOpen){
+      btn.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    }
+  });
+}
+buildFaq();
+
+/* ===== MODAL: already a member ===== */
+(function(){
+  const overlay = document.getElementById('memberModal');
+  const link = document.getElementById('memberLink');
+  const closeBtn = document.getElementById('memberModalClose');
+  if(!overlay) return;
+
+  const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  let lastFocus;
+
+  function open(){
+    lastFocus = document.activeElement;
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden','false');
+    const first = overlay.querySelector(FOCUSABLE);
+    if(first) setTimeout(()=>first.focus(),50);
+  }
+  function close(){
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden','true');
+    if(lastFocus) lastFocus.focus();
+  }
+
+  link && link.addEventListener('click', e => { e.preventDefault(); open(); });
+  closeBtn && closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', e => { if(e.target === overlay) close(); });
+  document.addEventListener('keydown', e => {
+    if(!overlay.classList.contains('open')) return;
+    if(e.key === 'Escape'){ close(); return; }
+    if(e.key === 'Tab'){
+      const focusable = [...overlay.querySelectorAll(FOCUSABLE)];
+      if(!focusable.length) return;
+      const first = focusable[0], last = focusable[focusable.length-1];
+      if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    }
+  });
+})();
+
+/* ===== HELLO BAR ===== */
+document.getElementById('dismissHello').addEventListener('click', ()=>{
+  document.getElementById('helloBar').classList.add('hidden');
+});
+</script>
+</body>
+</html>
