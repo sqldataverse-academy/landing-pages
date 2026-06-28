@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SQL Nexus Pro: Interview Masterclass by DataVerse Academy — 500+ real FAANG SQL interview problems with 5-layer expert breakdowns, video walkthroughs, and lifetime updates. One payment. Forever.">
+<title>SQL Nexus Pro: Interview Masterclass | DataVerse Academy</title>
+<link rel="icon" href="../assets/academy_logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-base: #060f08;
+  --bg-deep: #0a1a0f;
+  --bg-card: rgba(12,28,16,0.85);
+  --bg-card2: rgba(16,36,22,0.9);
+  --green-bright: #1DB954;
+  --green-mid: #22C55E;
+  --green-dim: #16a34a;
+  --green-glow: rgba(29,185,84,0.18);
+  --green-glow2: rgba(29,185,84,0.08);
+  --gold: #F5A623;
+  --gold-dim: #d4891a;
+  --gold-glow: rgba(245,166,35,0.2);
+  --text-primary: #e8fef0;
+  --text-secondary: #86efac;
+  --text-muted: #4ade80;
+  --text-dim: #6b7280;
+  --border: rgba(29,185,84,0.15);
+  --border-bright: rgba(29,185,84,0.35);
+  --font-head: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius: 12px;
+  --radius-lg: 20px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ===== SCROLL PROGRESS ===== */
+#progress-bar {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+  background: linear-gradient(90deg, var(--green-bright), var(--gold));
+  z-index: 9999; transition: width 0.1s linear;
+}
+
+/* ===== PARTICLES CANVAS ===== */
+#particles-canvas {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 0; opacity: 0.5;
+}
+
+/* ===== CURSOR GLOW ===== */
+#cursor-glow {
+  position: fixed; width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(29,185,84,0.06) 0%, transparent 70%);
+  border-radius: 50%; pointer-events: none; z-index: 1;
+  transform: translate(-50%, -50%); transition: opacity 0.3s;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed; top: 2px; left: 0; right: 0; z-index: 1000;
+  padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between;
+  transition: all 0.4s ease;
+}
+nav.scrolled {
+  background: rgba(6,15,8,0.92);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; }
+.nav-logo-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--green-bright), var(--green-dim));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: #fff;
+}
+.nav-logo-text { font-family: var(--font-head); font-weight: 700; font-size: 15px; color: var(--text-primary); }
+.nav-logo-text span { color: var(--green-bright); }
+.nav-cta {
+  background: linear-gradient(135deg, var(--green-bright), var(--green-dim));
+  color: #fff; border: none; padding: 0.55rem 1.3rem;
+  border-radius: 8px; font-family: var(--font-head); font-weight: 600; font-size: 13px;
+  cursor: pointer; text-decoration: none; display: inline-block;
+  box-shadow: 0 0 20px rgba(29,185,84,0.3);
+  animation: navPulse 3s ease-in-out infinite;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.nav-cta:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(29,185,84,0.5); }
+@keyframes navPulse {
+  0%,100% { box-shadow: 0 0 20px rgba(29,185,84,0.3); }
+  50% { box-shadow: 0 0 35px rgba(29,185,84,0.55); }
+}
+
+/* ===== COMMON SECTION STYLES ===== */
+section { position: relative; z-index: 2; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+.section-pad { padding: 100px 0; }
+.section-pad-sm { padding: 70px 0; }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--green-bright); background: rgba(29,185,84,0.1);
+  border: 1px solid rgba(29,185,84,0.25); padding: 5px 14px; border-radius: 999px;
+  margin-bottom: 1.2rem;
+}
+.eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green-bright); animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+h1,h2,h3 { font-family: var(--font-head); font-weight: 700; line-height: 1.15; }
+h1 { font-size: clamp(2.4rem,5vw,4rem); }
+h2 { font-size: clamp(1.9rem,3.5vw,2.8rem); }
+h3 { font-size: clamp(1.1rem,2vw,1.4rem); }
+
+.highlight { color: var(--green-bright); }
+.highlight-gold { color: var(--gold); }
+
+/* Animate on scroll */
+.anim-up { opacity: 0; transform: translateY(50px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.anim-up.visible { opacity: 1; transform: translateY(0); }
+.anim-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.anim-left.visible { opacity: 1; transform: translateX(0); }
+.anim-right { opacity: 0; transform: translateX(50px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.anim-right.visible { opacity: 1; transform: translateX(0); }
+.anim-fade { opacity: 0; transition: opacity 0.8s ease; }
+.anim-fade.visible { opacity: 1; }
+
+/* Stagger children */
+.stagger > * { opacity: 0; transform: translateY(40px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.stagger.visible > *:nth-child(1) { opacity:1; transform:translateY(0); transition-delay:0s; }
+.stagger.visible > *:nth-child(2) { opacity:1; transform:translateY(0); transition-delay:0.12s; }
+.stagger.visible > *:nth-child(3) { opacity:1; transform:translateY(0); transition-delay:0.24s; }
+.stagger.visible > *:nth-child(4) { opacity:1; transform:translateY(0); transition-delay:0.36s; }
+.stagger.visible > *:nth-child(5) { opacity:1; transform:translateY(0); transition-delay:0.48s; }
+.stagger.visible > *:nth-child(6) { opacity:1; transform:translateY(0); transition-delay:0.6s; }
+
+/* ===== HERO ===== */
+#hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 120px 0 80px; overflow: hidden;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(29,185,84,0.12) 0%, transparent 60%);
+}
+.hero-inner { text-align: center; max-width: 860px; margin: 0 auto; }
+.batch-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(29,185,84,0.12); border: 1px solid rgba(29,185,84,0.4);
+  padding: 8px 20px; border-radius: 999px; margin-bottom: 1.5rem;
+  font-family: var(--font-head); font-size: 13px; font-weight: 600; color: var(--green-bright);
+  animation: badgePop 0.6s cubic-bezier(0.34,1.56,0.64,1) both 0.3s;
+}
+.batch-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green-bright); animation: blink 1.5s infinite; }
+@keyframes badgePop { from{transform:scale(0); opacity:0;} to{transform:scale(1);opacity:1;} }
+
+.hero-title { margin-bottom: 1.4rem; }
+.hero-title .line { display: block; overflow: hidden; }
+.hero-title .word {
+  display: inline-block;
+  animation: wordReveal 0.7s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes wordReveal {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.hero-sub {
+  font-size: clamp(1rem,2vw,1.18rem); color: var(--text-secondary);
+  max-width: 640px; margin: 0 auto 2rem; line-height: 1.75;
+  opacity: 0; animation: fadeUp 0.8s ease both 1.2s;
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 3rem; opacity:0; animation: fadeUp 0.8s ease both 1.5s; }
+.btn-primary {
+  background: linear-gradient(135deg, var(--green-bright) 0%, var(--green-dim) 100%);
+  color: #fff; border: none; padding: 1rem 2rem; border-radius: 10px;
+  font-family: var(--font-head); font-weight: 700; font-size: 1rem;
+  cursor: pointer; text-decoration: none; display: inline-block;
+  box-shadow: 0 0 30px rgba(29,185,84,0.4);
+  position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary::after {
+  content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  animation: shimmer 2.5s ease-in-out infinite;
+}
+@keyframes shimmer { to { left: 200%; } }
+.btn-primary:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 0 45px rgba(29,185,84,0.6); }
+
+.btn-secondary {
+  background: transparent; color: var(--text-primary);
+  border: 1px solid var(--border-bright); padding: 1rem 1.8rem; border-radius: 10px;
+  font-family: var(--font-head); font-weight: 600; font-size: 1rem;
+  cursor: pointer; text-decoration: none; display: inline-block;
+  transition: all 0.2s;
+}
+.btn-secondary:hover { background: var(--green-glow); border-color: var(--green-bright); }
+
+/* Floating Stats */
+.hero-stats {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 1.2rem;
+  opacity: 0; animation: fadeUp 0.8s ease both 1.8s;
+}
+.stat-chip {
+  background: var(--bg-card); border: 1px solid var(--border);
+  padding: 0.65rem 1.2rem; border-radius: 10px;
+  font-family: var(--font-head); font-size: 13px;
+  animation: float 4s ease-in-out infinite;
+  backdrop-filter: blur(10px);
+}
+.stat-chip:nth-child(2) { animation-delay: 0.8s; }
+.stat-chip:nth-child(3) { animation-delay: 1.6s; }
+.stat-chip:nth-child(4) { animation-delay: 2.4s; }
+.stat-chip strong { color: var(--green-bright); }
+@keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+
+/* Countdown */
+.countdown-wrapper {
+  margin: 2rem auto 0; opacity:0; animation: fadeUp 0.8s ease both 2.1s;
+  display: inline-flex; flex-direction: column; align-items: center; gap: 0.5rem;
+}
+.countdown-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; }
+.countdown-timer { display: flex; gap: 0.8rem; }
+.cd-block {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  padding: 0.7rem 1rem; border-radius: 10px; min-width: 64px;
+  backdrop-filter: blur(10px);
+}
+.cd-num { font-family: var(--font-mono); font-size: 1.6rem; font-weight: 700; color: var(--gold); line-height: 1; }
+.cd-unit { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+
+/* ===== MARQUEE ===== */
+#marquee { padding: 28px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; background: rgba(6,15,8,0.6); }
+.marquee-track { display: flex; gap: 0; }
+.marquee-inner {
+  display: flex; gap: 0; white-space: nowrap;
+  animation: marqueeL 35s linear infinite;
+  flex-shrink: 0;
+}
+.marquee-inner.rev { animation: marqueeR 40s linear infinite; }
+@keyframes marqueeL { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+@keyframes marqueeR { from{transform:translateX(-50%);} to{transform:translateX(0);} }
+.marquee-track:hover .marquee-inner { animation-play-state: paused; }
+.co-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 20px; font-family: var(--font-head); font-size: 13px; font-weight: 500;
+  color: var(--text-secondary); border-right: 1px solid var(--border);
+  transition: color 0.2s;
+}
+.co-tag:hover { color: var(--green-bright); }
+.co-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green-bright); opacity: 0.5; }
+#marquee2 { padding: 18px 0; overflow: hidden; background: rgba(6,15,8,0.4); }
+
+/* ===== BRUTAL TRUTH ===== */
+#brutal { background: linear-gradient(180deg, var(--bg-base) 0%, #0a1a0f 100%); }
+.brutal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.2rem; margin-top: 3rem; }
+.brutal-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 1.8rem;
+  position: relative; overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.brutal-card:hover { transform: translateY(-4px); border-color: var(--border-bright); box-shadow: 0 8px 40px rgba(29,185,84,0.1); }
+.brutal-card::before { content:''; position:absolute; inset:0; background: radial-gradient(circle at 20% 20%, rgba(29,185,84,0.05), transparent 60%); }
+.brutal-icon { font-size: 2rem; margin-bottom: 1rem; }
+.brutal-card h3 { font-size: 1.05rem; margin-bottom: 0.6rem; color: var(--text-primary); }
+.brutal-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; }
+
+/* ===== WHAT IS IT ===== */
+#what { background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(29,185,84,0.06), transparent); }
+.what-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+@media(max-width:768px){ .what-inner{grid-template-columns:1fr;gap:2rem;} }
+.what-text h2 { margin-bottom: 1.2rem; }
+.what-text p { color: var(--text-secondary); margin-bottom: 1.2rem; line-height: 1.75; }
+.what-not {
+  background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2);
+  border-radius: var(--radius); padding: 1rem 1.4rem; margin-bottom: 1.5rem;
+  font-size: 0.95rem; color: #fca5a5;
+}
+.not-word { color: #ef4444; font-weight: 700; }
+.what-features { display: flex; flex-direction: column; gap: 1rem; }
+.wf-item { display: flex; align-items: flex-start; gap: 12px; }
+.wf-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(29,185,84,0.12); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px; }
+.wf-text strong { display: block; font-size: 0.95rem; color: var(--text-primary); margin-bottom: 2px; }
+.wf-text span { font-size: 0.85rem; color: var(--text-secondary); }
+
+/* ===== 5 LAYER ===== */
+#layers { background: linear-gradient(180deg, #0a1a0f 0%, var(--bg-base) 100%); }
+.layers-list { max-width: 780px; margin: 3rem auto 0; display: flex; flex-direction: column; gap: 0; }
+.layer-item {
+  display: flex; gap: 0; position: relative;
+  opacity: 0; transform: rotateX(30deg); transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.layer-item.visible { opacity: 1; transform: rotateX(0); }
+.layer-left { display: flex; flex-direction: column; align-items: center; width: 60px; flex-shrink: 0; }
+.layer-num {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--green-bright), var(--green-dim));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-weight: 700; font-size: 14px; color: #fff;
+  box-shadow: 0 0 20px rgba(29,185,84,0.3); flex-shrink: 0;
+}
+.layer-line { width: 2px; flex: 1; min-height: 30px; background: linear-gradient(180deg, var(--green-bright), transparent); margin-top: 4px; }
+.layer-last .layer-line { display: none; }
+.layer-content {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.4rem 1.6rem; margin-bottom: 1rem; flex: 1;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.layer-content:hover { border-color: var(--border-bright); box-shadow: 0 4px 30px rgba(29,185,84,0.08); }
+.layer-content h3 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--green-bright); }
+.layer-content p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; }
+
+/* ===== PROBLEMS PREVIEW ===== */
+#preview { background: radial-gradient(ellipse 80% 40% at 50% 100%, rgba(29,185,84,0.06), transparent); }
+.preview-controls { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 1.5rem; }
+.pc-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.pc-label { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.08em; text-transform: uppercase; width: 100%; }
+.pill-btn {
+  padding: 5px 14px; border-radius: 999px; font-size: 12px; font-weight: 500;
+  border: 1px solid var(--border); background: transparent; color: var(--text-secondary);
+  cursor: pointer; transition: all 0.2s; font-family: var(--font-head);
+}
+.pill-btn:hover { border-color: var(--green-bright); color: var(--green-bright); }
+.pill-btn.active { background: rgba(29,185,84,0.15); border-color: var(--green-bright); color: var(--green-bright); }
+.pill-btn.active-easy { background: rgba(74,222,128,0.12); border-color: #4ade80; color: #4ade80; }
+.pill-btn.active-medium { background: rgba(251,191,36,0.12); border-color: #fbbf24; color: #fbbf24; }
+.pill-btn.active-hard { background: rgba(239,68,68,0.12); border-color: #ef4444; color: #ef4444; }
+
+.preview-table-wrap {
+  border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;
+  background: var(--bg-card); backdrop-filter: blur(10px);
+}
+.preview-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.preview-table th {
+  padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim);
+  background: rgba(6,15,8,0.6); border-bottom: 1px solid var(--border);
+}
+.preview-table td { padding: 10px 16px; border-bottom: 1px solid rgba(29,185,84,0.06); vertical-align: middle; }
+.preview-table tr:last-child td { border-bottom: none; }
+.preview-table tr { transition: background 0.15s; }
+.preview-table tr:hover td { background: rgba(29,185,84,0.04); }
+.preview-table tr.hidden-row { display: none; }
+.badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+.badge-easy { background: rgba(74,222,128,0.12); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+.badge-medium { background: rgba(251,191,36,0.12); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
+.badge-hard { background: rgba(239,68,68,0.12); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+.cat-chip { font-size: 11px; color: var(--text-dim); background: rgba(255,255,255,0.04); padding: 2px 8px; border-radius: 6px; }
+
+.preview-footer { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.2rem; flex-wrap: wrap; gap: 1rem; }
+.preview-count { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); }
+.table-fade {
+  position: relative;
+}
+.table-fade::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
+  background: linear-gradient(to bottom, transparent, rgba(12,28,16,0.95));
+  pointer-events: none; transition: opacity 0.4s;
+}
+.table-fade.expanded::after { opacity: 0; }
+.see-more-btn, .see-less-btn {
+  display: flex; align-items: center; gap: 8px;
+  background: transparent; border: 1px solid var(--border-bright);
+  color: var(--green-bright); padding: 0.6rem 1.4rem; border-radius: 8px;
+  font-family: var(--font-head); font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.see-more-btn:hover, .see-less-btn:hover { background: var(--green-glow); }
+.see-less-btn { display: none; }
+
+/* ===== SAMPLE PROBLEM ===== */
+#sample { background: linear-gradient(180deg, var(--bg-base), #0a1a0f); }
+.problem-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); overflow: hidden; margin-top: 2.5rem;
+}
+.problem-tabs { display: flex; border-bottom: 1px solid var(--border); overflow-x: auto; }
+.ptab {
+  padding: 0.9rem 1.5rem; font-family: var(--font-head); font-size: 13px; font-weight: 600;
+  color: var(--text-dim); cursor: pointer; white-space: nowrap; border: none; background: none;
+  border-bottom: 2px solid transparent; transition: all 0.2s; position: relative; bottom: -1px;
+}
+.ptab:hover { color: var(--text-secondary); }
+.ptab.active { color: var(--green-bright); border-bottom-color: var(--green-bright); }
+.ptab.trap-tab.active { color: #ef4444; border-bottom-color: #ef4444; }
+.tab-panel { display: none; padding: 2rem; }
+.tab-panel.active { display: block; }
+.problem-context { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 1.5rem; }
+pre, code {
+  font-family: var(--font-mono); font-size: 13px;
+}
+.code-block {
+  background: rgba(6,15,8,0.8); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.4rem; overflow-x: auto; line-height: 1.7;
+}
+.kw { color: #818cf8; } .fn { color: #34d399; } .str { color: #fbbf24; } .cm { color: #6b7280; font-style: italic; } .op { color: #94a3b8; }
+.schema-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1.5rem; }
+.schema-table th { padding: 8px 12px; background: rgba(6,15,8,0.6); color: var(--text-dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--border); text-align: left; }
+.schema-table td { padding: 8px 12px; border-bottom: 1px solid rgba(29,185,84,0.06); }
+.trap-banner { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: var(--radius); padding: 1.2rem 1.5rem; margin-bottom: 1.2rem; }
+.trap-banner strong { color: #ef4444; }
+.trap-item { display: flex; gap: 10px; margin-bottom: 0.8rem; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+.trap-item::before { content: '⚠'; color: #f97316; flex-shrink: 0; margin-top: 1px; }
+
+/* ===== FULL PACKAGE ===== */
+#package { background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(29,185,84,0.05), transparent); }
+.package-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.2rem; margin-top: 3rem; }
+.pkg-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 1.8rem; position: relative; overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.pkg-card:hover { transform: translateY(-4px); border-color: var(--border-bright); box-shadow: 0 10px 40px rgba(29,185,84,0.1); }
+.pkg-card.core { border-color: rgba(29,185,84,0.4); background: rgba(29,185,84,0.06); }
+.pkg-badge { position: absolute; top: 1rem; right: 1rem; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+.pkg-badge.core-badge { background: rgba(29,185,84,0.2); color: var(--green-bright); border: 1px solid var(--border-bright); }
+.pkg-badge.bonus-badge { background: rgba(245,166,35,0.15); color: var(--gold); border: 1px solid rgba(245,166,35,0.3); }
+.pkg-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+.pkg-card h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
+.pkg-card p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.65; }
+.pkg-check-list { margin-top: 1rem; display: flex; flex-direction: column; gap: 6px; }
+.pkg-check { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-secondary); }
+.pkg-check::before { content: '✓'; color: var(--green-bright); font-weight: 700; flex-shrink: 0; }
+
+/* Counter animate */
+.count-up { display: inline; }
+
+/* ===== VALUE STACK ===== */
+#pricing {
+  background: linear-gradient(180deg, #0a1a0f 0%, var(--bg-base) 100%);
+}
+.value-table-wrap { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin: 2.5rem 0; }
+.value-table { width: 100%; border-collapse: collapse; }
+.value-table th { padding: 14px 20px; background: rgba(6,15,8,0.8); color: var(--text-dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; text-align: left; border-bottom: 1px solid var(--border); }
+.value-table td { padding: 14px 20px; border-bottom: 1px solid rgba(29,185,84,0.06); font-size: 14px; }
+.value-table tr:last-child td { border-bottom: none; }
+.value-table .total-row td { background: rgba(245,166,35,0.08); border-top: 1px solid rgba(245,166,35,0.3); }
+.vt-amount { color: var(--text-secondary); font-family: var(--font-mono); }
+.vt-total { color: var(--gold); font-weight: 700; font-size: 1.1rem; font-family: var(--font-mono); }
+.price-hero {
+  text-align: center; padding: 3rem;
+  background: linear-gradient(135deg, rgba(29,185,84,0.08), rgba(245,166,35,0.05));
+  border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 2rem;
+}
+.price-main { font-family: var(--font-mono); font-size: clamp(3rem,6vw,5rem); font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
+.price-strike { font-family: var(--font-mono); font-size: 1.2rem; color: var(--text-dim); text-decoration: line-through; margin-bottom: 0.5rem; }
+.price-saving { display: inline-block; background: rgba(29,185,84,0.15); border: 1px solid var(--border-bright); color: var(--green-bright); padding: 5px 16px; border-radius: 999px; font-size: 14px; font-weight: 600; margin-bottom: 1.5rem; }
+.price-meta { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 2rem; }
+
+/* ===== COMPARISON ===== */
+#compare { background: radial-gradient(ellipse at 50% 0%, rgba(29,185,84,0.04), transparent 50%); }
+.compare-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-lg); }
+.compare-table { width: 100%; border-collapse: collapse; min-width: 640px; }
+.compare-table th { padding: 16px 20px; font-size: 13px; font-weight: 700; text-align: left; border-bottom: 1px solid var(--border); }
+.compare-table th:first-child { background: rgba(6,15,8,0.6); color: var(--text-dim); }
+.compare-table th.other { background: rgba(6,15,8,0.4); color: var(--text-dim); text-align: center; }
+.compare-table th.ours { background: rgba(29,185,84,0.1); color: var(--green-bright); text-align: center; border-left: 1px solid rgba(29,185,84,0.3); }
+.compare-table td { padding: 13px 20px; border-bottom: 1px solid rgba(29,185,84,0.06); font-size: 13px; }
+.compare-table td:not(:first-child) { text-align: center; }
+.compare-table td.ours-cell { background: rgba(29,185,84,0.04); border-left: 1px solid rgba(29,185,84,0.15); color: var(--text-secondary); }
+.compare-table td.other-cell { color: var(--text-dim); }
+.compare-table tr:last-child td { border-bottom: none; }
+.check-yes { color: var(--green-bright); font-size: 16px; font-weight: 700; }
+.check-no { color: #ef4444; font-size: 16px; }
+
+/* ===== WALL OF RESULTS ===== */
+#wall { background: linear-gradient(180deg, var(--bg-base), #0a1a0f); }
+.wall-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 3rem 0; }
+.wall-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 2rem; text-align: center; position: relative;
+  overflow: hidden;
+}
+.wall-card::before { content:''; position:absolute; inset:0; background: linear-gradient(135deg, rgba(29,185,84,0.03), transparent); }
+.wall-avatar {
+  width: 64px; height: 64px; border-radius: 50%;
+  border: 2px dashed rgba(29,185,84,0.3);
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;
+  font-size: 1.8rem; color: var(--text-dim);
+  animation: skeletonPulse 2s ease-in-out infinite;
+}
+@keyframes skeletonPulse { 0%,100%{border-color:rgba(29,185,84,0.2);} 50%{border-color:rgba(29,185,84,0.5);} }
+.wall-name { font-family: var(--font-head); font-size: 14px; font-weight: 600; color: var(--text-dim); margin-bottom: 4px; }
+.wall-role { font-size: 12px; color: var(--green-bright); margin-bottom: 0.8rem; }
+.wall-quote { font-size: 0.88rem; color: var(--text-dim); line-height: 1.65; font-style: italic; }
+.wall-num { position: absolute; top: 1rem; right: 1rem; font-family: var(--font-mono); font-size: 11px; color: rgba(29,185,84,0.3); }
+.honest-box {
+  background: linear-gradient(135deg, rgba(245,166,35,0.06), rgba(29,185,84,0.06));
+  border: 1px solid rgba(245,166,35,0.25); border-radius: var(--radius-lg); padding: 2.5rem;
+  margin-top: 1rem;
+}
+.honest-box h3 { font-size: 1.2rem; color: var(--gold); margin-bottom: 1rem; }
+.honest-box p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 1.5rem; }
+.honest-bullets { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
+.hb { display: flex; gap: 10px; font-size: 0.9rem; color: var(--text-secondary); }
+.hb strong { color: var(--green-bright); }
+
+/* ===== ABOUT ===== */
+#about { background: radial-gradient(ellipse at 80% 50%, rgba(29,185,84,0.05), transparent 50%); }
+.about-inner { display: grid; grid-template-columns: auto 1fr; gap: 4rem; align-items: center; }
+@media(max-width:768px){.about-inner{grid-template-columns:1fr;gap:2rem;text-align:center;}}
+.about-img-wrap { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.about-img {
+  width: 180px; height: 180px; border-radius: 50%;
+  border: 3px solid var(--border-bright);
+  box-shadow: 0 0 40px rgba(29,185,84,0.2);
+  object-fit: cover; display: block;
+  background: var(--bg-card);
+}
+.about-img-placeholder {
+  width: 180px; height: 180px; border-radius: 50%;
+  border: 3px solid var(--border-bright);
+  box-shadow: 0 0 40px rgba(29,185,84,0.2);
+  background: var(--bg-card); display: flex; align-items: center; justify-content: center;
+  font-size: 4rem; color: var(--text-dim);
+}
+.creds { display: flex; flex-direction: column; gap: 8px; }
+.cred-badge {
+  padding: 6px 14px; border-radius: 8px;
+  background: rgba(29,185,84,0.1); border: 1px solid var(--border);
+  font-size: 12px; font-weight: 600; color: var(--green-bright); text-align: center;
+  animation: float 5s ease-in-out infinite;
+}
+.cred-badge:nth-child(2) { animation-delay: 1.5s; }
+.cred-badge:nth-child(3) { animation-delay: 3s; }
+.about-text h2 { margin-bottom: 1rem; }
+.about-text p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem; }
+
+/* ===== FAQ ===== */
+#faq { background: linear-gradient(180deg, #0a1a0f, var(--bg-base)); }
+.faq-list { max-width: 760px; margin: 2.5rem auto 0; display: flex; flex-direction: column; gap: 0.8rem; }
+.faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color 0.3s; }
+.faq-item.open { border-color: var(--border-bright); }
+.faq-q {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1.2rem 1.4rem; cursor: pointer; font-family: var(--font-head); font-size: 0.95rem; font-weight: 600;
+  color: var(--text-primary); background: none; border: none; width: 100%; text-align: left;
+}
+.faq-q:hover { color: var(--green-bright); }
+.faq-chevron { width: 20px; height: 20px; flex-shrink: 0; color: var(--green-bright); transition: transform 0.3s; }
+.faq-item.open .faq-chevron { transform: rotate(90deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.faq-a-inner { padding: 0 1.4rem 1.2rem; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.75; }
+
+/* ===== FINAL CTA ===== */
+#final-cta {
+  padding: 120px 0;
+  background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(29,185,84,0.12), rgba(245,166,35,0.04), transparent);
+  position: relative; overflow: hidden;
+}
+#final-cta::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(circle at 50% 50%, rgba(29,185,84,0.06), transparent 60%);
+  animation: breathe 6s ease-in-out infinite;
+}
+@keyframes breathe { 0%,100%{transform:scale(1); opacity:0.5;} 50%{transform:scale(1.1); opacity:1;} }
+.final-cta-inner { text-align: center; max-width: 820px; margin: 0 auto; }
+.final-cta-inner h2 { font-size: clamp(2rem,4vw,3.2rem); margin-bottom: 1rem; }
+.final-list { display: flex; flex-direction: column; gap: 8px; max-width: 540px; margin: 2rem auto; text-align: left; }
+.fl-item { display: flex; gap: 10px; font-size: 0.92rem; color: var(--text-secondary); }
+.fl-check { color: var(--green-bright); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+.final-price-block { margin: 2rem 0; }
+.final-price { font-family: var(--font-mono); font-size: clamp(2.5rem,5vw,4rem); font-weight: 700; color: var(--gold); }
+.final-meta { font-size: 0.88rem; color: var(--text-secondary); margin: 0.5rem 0 2rem; }
+.btn-final {
+  display: inline-block; background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  color: #fff; border: none; padding: 1.2rem 3rem; border-radius: 12px;
+  font-family: var(--font-head); font-weight: 800; font-size: 1.1rem;
+  cursor: pointer; text-decoration: none;
+  box-shadow: 0 0 50px rgba(245,166,35,0.4);
+  position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s;
+  animation: goldPulse 2.5s ease-in-out infinite;
+}
+.btn-final::after {
+  content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shimmer 2s ease-in-out infinite;
+}
+.btn-final:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 0 70px rgba(245,166,35,0.6); }
+@keyframes goldPulse { 0%,100%{box-shadow:0 0 40px rgba(245,166,35,0.3);} 50%{box-shadow:0 0 60px rgba(245,166,35,0.55);} }
+.refund-note { margin-top: 1.2rem; font-size: 0.82rem; color: var(--text-dim); }
+.refund-note a { color: var(--green-bright); }
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 2.5rem; text-align: center; border-top: 1px solid var(--border);
+  font-size: 13px; color: var(--text-dim); background: var(--bg-base);
+}
+footer a { color: var(--green-bright); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* Floating CTA */
+#float-cta {
+  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999;
+  opacity: 0; transform: translateY(20px); transition: all 0.4s ease;
+  pointer-events: none;
+}
+#float-cta.show { opacity: 1; transform: translateY(0); pointer-events: all; }
+.float-btn {
+  background: linear-gradient(135deg, var(--green-bright), var(--green-dim));
+  color: #fff; border: none; padding: 0.8rem 1.5rem; border-radius: 50px;
+  font-family: var(--font-head); font-weight: 700; font-size: 13px;
+  box-shadow: 0 4px 30px rgba(29,185,84,0.5); cursor: pointer; text-decoration: none;
+  display: flex; align-items: center; gap: 8px; transition: transform 0.2s;
+}
+.float-btn:hover { transform: scale(1.05); }
+.float-dot { width: 8px; height: 8px; border-radius: 50%; background: #fff; animation: blink 1.5s infinite; }
+
+/* Responsive */
+@media(max-width:768px){
+  nav { padding: 0.8rem 1rem; }
+  .nav-logo-text { font-size: 13px; }
+  .hero-stats { gap: 0.6rem; }
+  .brutal-grid { grid-template-columns: 1fr; }
+  .package-grid { grid-template-columns: 1fr; }
+  .compare-table th, .compare-table td { padding: 10px 12px; font-size: 12px; }
+  .wall-grid { grid-template-columns: 1fr; }
+  #float-cta { bottom: 1rem; right: 1rem; }
+  .float-btn { font-size: 12px; padding: 0.7rem 1.2rem; }
+  .section-pad { padding: 60px 0; }
+  .cd-num { font-size: 1.2rem; }
+  .cd-block { min-width: 50px; padding: 0.5rem 0.7rem; }
+}
+@media(max-width:480px){
+  .hero-ctas { flex-direction: column; align-items: center; }
+  .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+  .preview-table th:nth-child(2), .preview-table td:nth-child(2) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div id="progress-bar"></div>
+
+<!-- PARTICLES -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- CURSOR GLOW (desktop only) -->
+<div id="cursor-glow"></div>
+
+<!-- FLOATING CTA -->
+<div id="float-cta">
+  <a href="#pricing" class="float-btn">
+    <span class="float-dot"></span>
+    Claim ₹4,999 Founding Price
+  </a>
+</div>
+
+<!-- ===== NAV ===== -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">SQL</div>
+    <span class="nav-logo-text">DataVerse <span>Academy</span></span>
+  </div>
+  <a href="#pricing" class="nav-cta">Get Instant Access →</a>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="batch-badge">
+        <span class="batch-dot"></span>
+        BATCH 1 — LIVE · Founding Member Price
+      </div>
+
+      <h1 class="hero-title">
+        <span class="line">
+          <span class="word" style="animation-delay:0.3s">The Only SQL Interview</span>
+        </span>
+        <span class="line">
+          <span class="word highlight" style="animation-delay:0.5s">Preparation System</span>
+        </span>
+        <span class="line">
+          <span class="word" style="animation-delay:0.7s">That Never Stops Growing</span>
+        </span>
+      </h1>
+
+      <p class="hero-sub">
+        500+ real interview problems from Amazon, Google, Flipkart &amp; more — with full 5-layer breakdowns, video walkthroughs, and a lifetime community. One payment. Forever.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#pricing" class="btn-primary">Claim Founding Price — ₹4,999 →</a>
+        <a href="#preview" class="btn-secondary">Browse 48 Sample Problems</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-chip"><strong>500+</strong> Real Interview Problems</div>
+        <div class="stat-chip"><strong>5-Layer</strong> Problem Breakdown</div>
+        <div class="stat-chip"><strong>₹4,999</strong> One-Time · Forever</div>
+        <div class="stat-chip"><strong>Lifetime</strong> Community Access</div>
+      </div>
+
+      <div class="countdown-wrapper">
+        <div class="countdown-label">⚡ Batch 1 founding price closes in</div>
+        <div class="countdown-timer">
+          <div class="cd-block"><div class="cd-num" id="cd-d">07</div><div class="cd-unit">Days</div></div>
+          <div class="cd-block"><div class="cd-num" id="cd-h">23</div><div class="cd-unit">Hrs</div></div>
+          <div class="cd-block"><div class="cd-num" id="cd-m">59</div><div class="cd-unit">Min</div></div>
+          <div class="cd-block"><div class="cd-num" id="cd-s">59</div><div class="cd-unit">Sec</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<div id="marquee">
+  <div class="marquee-track">
+    <div class="marquee-inner" id="m1"></div>
+    <div class="marquee-inner" id="m2"></div>
+  </div>
+</div>
+<div id="marquee2">
+  <div class="marquee-track">
+    <div class="marquee-inner rev" id="m3"></div>
+    <div class="marquee-inner rev" id="m4"></div>
+  </div>
+</div>
+
+<!-- ===== BRUTAL TRUTH ===== -->
+<section id="brutal" class="section-pad">
+  <div class="container">
+    <div class="anim-up">
+      <div class="eyebrow">The Real Problem</div>
+      <h2>Why You Keep Failing SQL Rounds<br><span class="highlight">Despite Knowing SQL</span></h2>
+      <p style="color:var(--text-secondary);margin-top:1rem;max-width:600px;line-height:1.75;">You've done the courses. Watched the videos. Grinded the easy problems. And yet — the moment a real interview problem lands in front of you, something breaks down. Here's why.</p>
+    </div>
+    <div class="brutal-grid stagger">
+      <div class="brutal-card">
+        <div class="brutal-icon">🧪</div>
+        <h3>You're Practicing on Toy Data</h3>
+        <p>Most platforms give you pristine, sanitized tables. Real interviews throw ambiguous requirements, unexpected NULLs, and schemas that actually require thinking — not typing.</p>
+      </div>
+      <div class="brutal-card">
+        <div class="brutal-icon">🙈</div>
+        <h3>You See Answers, Not Thinking</h3>
+        <p>Solutions online show the final query. They skip the expert pause — the moment of choosing between two approaches, spotting the trap, and picking the better path. That's what interviewers actually evaluate.</p>
+      </div>
+      <div class="brutal-card">
+        <div class="brutal-icon">🏝️</div>
+        <h3>You're Practicing in Isolation</h3>
+        <p>No one checks if your logic is actually correct — or just technically runs. No one points out the edge case you missed. No one tells you your approach will break at scale.</p>
+      </div>
+      <div class="brutal-card">
+        <div class="brutal-icon">📦</div>
+        <h3>Your Preparation Is Static</h3>
+        <p>You finish a course, and that's it. But companies keep updating what they ask. A static product becomes stale the moment you buy it. You need preparation that evolves.</p>
+      </div>
+      <div class="brutal-card">
+        <div class="brutal-icon">🎭</div>
+        <h3>Syntax ≠ Judgment</h3>
+        <p>Most SQL prep teaches you syntax. Interviewers test <em>judgment</em> — how you think through a problem, which approach you choose, where you spot the trap. That gap is what costs you offers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHAT IS IT ===== -->
+<section id="what" class="section-pad">
+  <div class="container">
+    <div class="what-inner">
+      <div class="what-text anim-left">
+        <div class="eyebrow">The Solution</div>
+        <h2>What Is SQL Nexus Pro:<br><span class="highlight">Interview Masterclass?</span></h2>
+        <div class="what-not">
+          <span class="not-word">NOT</span> another beginner SQL course. <span class="not-word">NOT</span> another problem dump with no context.
+        </div>
+        <p>It is a <strong>complete, evergreen SQL interview preparation system</strong> — built around 500+ previously asked, real SQL interview questions from companies like Amazon, Google, Flipkart, Microsoft, Swiggy, Walmart, and more.</p>
+        <p>Every problem broken down the way an expert would walk you through it in a <strong>1-on-1 session</strong>. And unlike every other resource you've tried — <span class="highlight">it never stops growing.</span></p>
+        <a href="#pricing" class="btn-primary" style="margin-top:1.5rem;display:inline-block;">Start Mastering SQL →</a>
+      </div>
+      <div class="what-features anim-right">
+        <div class="wf-item">
+          <div class="wf-icon">📈</div>
+          <div class="wf-text">
+            <strong>Easy → Medium → Hard Progression</strong>
+            <span>Always know what to work on next. No more random grinding.</span>
+          </div>
+        </div>
+        <div class="wf-item">
+          <div class="wf-icon">🔬</div>
+          <div class="wf-text">
+            <strong>5-Layer Expert Breakdown</strong>
+            <span>Business context → thinking process → multiple approaches → traps → video walkthrough.</span>
+          </div>
+        </div>
+        <div class="wf-item">
+          <div class="wf-icon">♾️</div>
+          <div class="wf-text">
+            <strong>Lifetime Updates, Zero Renewals</strong>
+            <span>New problems added every month, forever. One payment. No tiers.</span>
+          </div>
+        </div>
+        <div class="wf-item">
+          <div class="wf-icon">🤝</div>
+          <div class="wf-text">
+            <strong>Live Community, Not a Ghost Forum</strong>
+            <span>Daily problems, weekly FAANG drops, doubt resolution, Sandipan oversight.</span>
+          </div>
+        </div>
+        <div class="wf-item">
+          <div class="wf-icon">🇮🇳</div>
+          <div class="wf-text">
+            <strong>Built for the Indian Market</strong>
+            <span>Indian business contexts, Indian company problems, Indian salary levels in mind.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5 LAYER BREAKDOWN ===== -->
+<section id="layers" class="section-pad">
+  <div class="container">
+    <div class="anim-up" style="text-align:center;max-width:600px;margin:0 auto 1rem;">
+      <div class="eyebrow">The Differentiator</div>
+      <h2>The 5-Layer Breakdown —<br><span class="highlight">Every Problem, Every Time</span></h2>
+      <p style="color:var(--text-secondary);margin-top:1rem;line-height:1.75;">This is what makes this system different from every problem bank you've ever tried. Not just the answer — everything around the answer.</p>
+    </div>
+    <div class="layers-list">
+      <div class="layer-item"><div class="layer-left"><div class="layer-num">1</div><div class="layer-line"></div></div><div class="layer-content"><h3>Business Context</h3><p>What real-world scenario is this problem modeling? What decision is a company trying to make? You learn to think like an analyst — not just a query writer.</p></div></div>
+      <div class="layer-item"><div class="layer-left"><div class="layer-num">2</div><div class="layer-line"></div></div><div class="layer-content"><h3>Problem Statement + Schema</h3><p>The problem as it was asked — full table structure and sample data so you can attempt it before you see the solution. No hand-holding.</p></div></div>
+      <div class="layer-item"><div class="layer-left"><div class="layer-num">3</div><div class="layer-line"></div></div><div class="layer-content"><h3>Step-by-Step Thinking Breakdown</h3><p>How an expert approaches this from scratch — what they read first, the core challenge identified, how they break it into steps before writing a single line of SQL.</p></div></div>
+      <div class="layer-item"><div class="layer-left"><div class="layer-num">4</div><div class="layer-line"></div></div><div class="layer-content"><h3>Multiple Approaches: Brute Force → Optimized</h3><p>The first approach that comes to mind. Why it works. Then — why there's a better way. The optimized solution with a clear explanation of what makes it superior.</p></div></div>
+      <div class="layer-item"><div class="layer-left"><div class="layer-num">5</div><div class="layer-line"></div></div><div class="layer-content"><h3>Common Mistakes and Traps</h3><p>What most candidates get wrong. The NULL trap. The off-by-one in a window frame. The JOIN that silently multiplies rows. Knowing the trap is half the battle.</p></div></div>
+      <div class="layer-item layer-last"><div class="layer-left"><div class="layer-num">🎬</div><div class="layer-line"></div></div><div class="layer-content"><h3>Full Video Walkthrough</h3><p>A complete recorded walkthrough of every problem — watch exactly how an experienced professional thinks in real time, not just read the solution after the fact.</p></div></div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;" class="anim-up">
+      <a href="#pricing" class="btn-primary">Get All 500+ Problems with Full Breakdowns →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROBLEMS PREVIEW ===== -->
+<section id="preview" class="section-pad">
+  <div class="container">
+    <div class="anim-up" style="text-align:center;max-width:620px;margin:0 auto 2.5rem;">
+      <div class="eyebrow">Problem Preview</div>
+      <h2>48 Sample Problems.<br><span class="highlight">500+ Waiting Inside.</span></h2>
+      <p style="color:var(--text-secondary);margin-top:1rem;line-height:1.75;">Browse real problems from real company interviews — filtered by difficulty and category. This is just the preview.</p>
+    </div>
+
+    <div class="preview-controls">
+      <div class="pc-group">
+        <span class="pc-label">Difficulty</span>
+        <button class="pill-btn active" onclick="filterProblems('diff','All',this)">All</button>
+        <button class="pill-btn" onclick="filterProblems('diff','Easy',this)">Easy</button>
+        <button class="pill-btn" onclick="filterProblems('diff','Medium',this)">Medium</button>
+        <button class="pill-btn" onclick="filterProblems('diff','Hard',this)">Hard</button>
+      </div>
+      <div class="pc-group" id="cat-btns">
+        <span class="pc-label">Category</span>
+      </div>
+    </div>
+
+    <div class="table-fade" id="table-fade-wrap">
+      <div class="preview-table-wrap">
+        <table class="preview-table">
+          <thead>
+            <tr>
+              <th style="width:38%">Problem</th>
+              <th style="width:18%">Company</th>
+              <th style="width:12%">Difficulty</th>
+              <th style="width:32%">Category</th>
+            </tr>
+          </thead>
+          <tbody id="problems-tbody"></tbody>
+        </table>
+        <div class="preview-footer">
+          <span class="preview-count" id="preview-count">Showing 6 of 48 problems</span>
+          <div style="display:flex;gap:0.8rem;align-items:center;flex-wrap:wrap;">
+            <button class="see-more-btn" id="see-more-btn" onclick="showMore()">
+              <span>See All 48 Problems</span> <span>↓</span>
+            </button>
+            <button class="see-less-btn" id="see-less-btn" onclick="showLess()">
+              <span>See Less</span> <span>↑</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:2.5rem;" class="anim-up">
+      <a href="#pricing" class="btn-primary">Unlock All 500+ Interview Problems →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SAMPLE PROBLEM ===== -->
+<section id="sample" class="section-pad">
+  <div class="container">
+    <div class="anim-up" style="text-align:center;max-width:620px;margin:0 auto 1rem;">
+      <div class="eyebrow">Inside a Real Problem</div>
+      <h2>See What "5-Layer Breakdown"<br><span class="highlight">Actually Looks Like</span></h2>
+      <p style="color:var(--text-secondary);margin-top:1rem;line-height:1.75;">This is a real Medium-difficulty problem from an Amazon Senior Data Analyst OA. This is the level of depth you get — for every single problem.</p>
+    </div>
+
+    <div class="problem-card anim-up">
+      <div class="problem-tabs">
+        <button class="ptab active" onclick="switchTab('ctx',this)">📋 Context</button>
+        <button class="ptab" onclick="switchTab('schema',this)">🗃️ Schema</button>
+        <button class="ptab" onclick="switchTab('output',this)">📊 Expected Output</button>
+        <button class="ptab" onclick="switchTab('solution',this)">✅ Solution</button>
+        <button class="ptab trap-tab" onclick="switchTab('trap',this)">⚠️ The Trap</button>
+      </div>
+
+      <div id="tab-ctx" class="tab-panel active">
+        <div style="display:flex;gap:10px;margin-bottom:1.2rem;flex-wrap:wrap;">
+          <span class="badge badge-medium">Medium</span>
+          <span style="background:rgba(99,102,241,0.12);color:#a5b4fc;border:1px solid rgba(99,102,241,0.3);padding:2px 10px;border-radius:999px;font-size:11px;font-weight:600;">Amazon OA · Senior Data Analyst</span>
+        </div>
+        <h3 style="font-size:1.2rem;margin-bottom:1rem;">Repeat Purchase Customers</h3>
+        <p class="problem-context">You are working as a data analyst for an e-commerce company. The business team wants to identify customers who show strong <strong>repeat purchase behavior</strong>.</p>
+        <p class="problem-context">A customer is considered a repeat purchase customer if they placed <strong>at least 2 delivered orders within any 7-day period</strong>. This analysis helps identify highly engaged customers suitable for loyalty campaigns, retention programs, or personalized offers.</p>
+        <div style="background:rgba(29,185,84,0.06);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem;margin-top:1rem;">
+          <p style="font-size:0.9rem;color:var(--text-secondary);"><strong style="color:var(--green-bright);">Business context:</strong> The marketing team needs this to launch a repeat-buyer loyalty program. Your query is the foundation of that campaign.</p>
+        </div>
+      </div>
+
+      <div id="tab-schema" class="tab-panel">
+        <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:1.2rem;">Table: <code style="color:var(--green-bright);">orders</code></p>
+        <table class="schema-table">
+          <thead><tr><th>Column</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code class="fn">order_id</code></td><td><code class="kw">INT</code></td><td style="color:var(--text-secondary);">Unique identifier of the order</td></tr>
+            <tr><td><code class="fn">customer_id</code></td><td><code class="kw">INT</code></td><td style="color:var(--text-secondary);">Unique identifier of the customer</td></tr>
+            <tr><td><code class="fn">order_date</code></td><td><code class="kw">DATE</code></td><td style="color:var(--text-secondary);">Date on which the order was placed</td></tr>
+            <tr><td><code class="fn">order_status</code></td><td><code class="kw">VARCHAR</code></td><td style="color:var(--text-secondary);">Delivered / Cancelled / Returned / Failed</td></tr>
+            <tr><td><code class="fn">order_amount</code></td><td><code class="kw">DECIMAL</code></td><td style="color:var(--text-secondary);">Order amount in INR</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:0.88rem;color:var(--text-secondary);margin-top:0.5rem;">📌 Only <code style="color:var(--gold);">order_status = 'Delivered'</code> orders are relevant. Cancelled, returned, and failed orders must be excluded before any logic is applied.</p>
+      </div>
+
+      <div id="tab-output" class="tab-panel">
+        <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:1.2rem;">Expected output — customers who had 2+ delivered orders within any 7-day window:</p>
+        <table class="schema-table" style="margin-bottom:1.2rem;">
+          <thead><tr><th>customer_id</th><th>first_order_date</th><th>second_order_date</th><th>days_between_orders</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--green-bright);">1</td><td>2024-01-01</td><td>2024-01-06</td><td style="color:var(--gold);">5</td></tr>
+            <tr><td style="color:var(--green-bright);">3</td><td>2024-03-05</td><td>2024-03-11</td><td style="color:var(--gold);">6</td></tr>
+            <tr><td style="color:var(--green-bright);">4</td><td>2024-04-10</td><td>2024-04-17</td><td style="color:var(--gold);">7</td></tr>
+            <tr><td style="color:var(--green-bright);">5</td><td>2024-05-04</td><td>2024-05-09</td><td style="color:var(--gold);">5</td></tr>
+          </tbody>
+        </table>
+        <div style="background:rgba(6,15,8,0.6);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;font-size:0.88rem;color:var(--text-secondary);line-height:1.7;">
+          <strong style="color:var(--text-primary);">Why Customer 2 doesn't qualify:</strong> Their delivered orders are 11 days apart — outside the 7-day window.<br>
+          <strong style="color:var(--text-primary);">Why Customer 3 qualifies:</strong> Cancelled order ignored — delivered orders are 6 days apart ✓<br>
+          <strong style="color:var(--text-primary);">Exactly 7 days counts as valid</strong> — Customer 4 qualifies with exactly 7 days between orders.
+        </div>
+      </div>
+
+      <div id="tab-solution" class="tab-panel">
+        <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:1.2rem;">SQL Server solution — step-by-step approach:</p>
+        <div class="code-block">
+<pre><span class="cm">-- Step 1: Filter to only Delivered orders</span>
+<span class="kw">WITH</span> delivered_orders <span class="kw">AS</span> (
+    <span class="kw">SELECT</span>
+        order_id, customer_id,
+        order_date, order_amount
+    <span class="kw">FROM</span> orders
+    <span class="kw">WHERE</span> order_status = <span class="str">'Delivered'</span>
+),
+
+<span class="cm">-- Step 2: Self-join to find pairs within 7 days</span>
+qualifying_pairs <span class="kw">AS</span> (
+    <span class="kw">SELECT</span>
+        o1.customer_id,
+        o1.order_date <span class="kw">AS</span> first_order_date,
+        o2.order_date <span class="kw">AS</span> second_order_date,
+        <span class="fn">DATEDIFF</span>(<span class="kw">DAY</span>, o1.order_date, o2.order_date) <span class="kw">AS</span> days_between_orders,
+        <span class="cm">-- Rank pairs to get the earliest qualifying pair</span>
+        <span class="fn">ROW_NUMBER</span>() <span class="kw">OVER</span> (
+            <span class="kw">PARTITION BY</span> o1.customer_id
+            <span class="kw">ORDER BY</span> o1.order_date, o2.order_date
+        ) <span class="kw">AS</span> rn
+    <span class="kw">FROM</span> delivered_orders o1
+    <span class="kw">INNER JOIN</span> delivered_orders o2
+        <span class="kw">ON</span>  o1.customer_id = o2.customer_id
+        <span class="kw">AND</span> o1.order_date <span class="op">&lt;</span> o2.order_date
+        <span class="kw">AND</span> <span class="fn">DATEDIFF</span>(<span class="kw">DAY</span>, o1.order_date, o2.order_date) <span class="op">&lt;=</span> <span class="str">7</span>
+)
+
+<span class="cm">-- Step 3: Return earliest qualifying pair per customer</span>
+<span class="kw">SELECT</span>
+    customer_id, first_order_date,
+    second_order_date, days_between_orders
+<span class="kw">FROM</span> qualifying_pairs
+<span class="kw">WHERE</span> rn = <span class="str">1</span>
+<span class="kw">ORDER BY</span> customer_id;</pre>
+        </div>
+      </div>
+
+      <div id="tab-trap" class="tab-panel">
+        <div class="trap-banner">
+          <strong>⚠️ This is what most candidates get wrong</strong>
+        </div>
+        <div class="trap-item">This problem <strong>looks like a simple GROUP BY</strong> problem — but GROUP BY alone is not enough. The 7-day window requires comparing rows against each other, which means a self-join or window function approach.</div>
+        <div class="trap-item">The condition is NOT "customers with at least 2 delivered orders." The 2 orders must fall within <strong>any 7-day window</strong> — completely different logic.</div>
+        <div class="trap-item">Candidates forget to <strong>filter non-delivered orders first</strong>. If you include Cancelled/Returned/Failed orders before the logic, your window calculations are wrong.</div>
+        <div class="trap-item">Exactly <strong>7 days is valid</strong> — using strict less-than (<code>&lt;</code> 7) eliminates Customer 4 and gives a wrong answer.</div>
+        <div class="trap-item">If a customer has multiple qualifying pairs, return the <strong>earliest pair only</strong> — ROW_NUMBER() is the correct tool here.</div>
+        <div style="background:rgba(29,185,84,0.06);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin-top:1rem;font-size:0.88rem;color:var(--text-secondary);">
+          <strong style="color:var(--green-bright);">Inside SQL Nexus Pro</strong> — every problem comes with exactly this level of trap breakdown, plus the video walkthrough where Sandipan talks you through each mistake live.
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:2.5rem;" class="anim-up">
+      <a href="#pricing" class="btn-primary">Solve 500 More Problems Like This →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FULL PACKAGE ===== -->
+<section id="package" class="section-pad">
+  <div class="container">
+    <div class="anim-up" style="text-align:center;max-width:620px;margin:0 auto 1rem;">
+      <div class="eyebrow">Everything Included</div>
+      <h2>One Payment. <span class="highlight">Everything. Forever.</span></h2>
+      <p style="color:var(--text-secondary);margin-top:1rem;line-height:1.75;">This isn't a course with an upsell waiting around the corner. Everything below is included the moment you join.</p>
+    </div>
+    <div class="package-grid stagger">
+      <div class="pkg-card core">
+        <span class="pkg-badge core-badge">CORE</span>
+        <div class="pkg-icon">🎯</div>
+        <h3><span class="count-up" data-target="500">0</span>+ Real SQL Interview Problems</h3>
+        <p>Easy → Medium → Hard. Each tagged by concept and company. New problems added every month, for life, at no extra cost.</p>
+        <div class="pkg-check-list">
+          <div class="pkg-check">120+ Easy — Never get eliminated in round 1</div>
+          <div class="pkg-check">220+ Medium — Where most interviews are won</div>
+          <div class="pkg-check">160+ Hard — FAANG-level, senior-role problems</div>
+        </div>
+      </div>
+      <div class="pkg-card">
+        <span class="pkg-badge bonus-badge">BONUS 1</span>
+        <div class="pkg-icon">🏗️</div>
+        <h3>Monthly SQL Projects (12–15, Indian Context)</h3>
+        <p>Multi-part analytical projects built on Indian business datasets — SwiftCart, BharatMart, ZestoPay, MediCore. Portfolio builders. Released monthly, forever.</p>
+      </div>
+      <div class="pkg-card">
+        <span class="pkg-badge bonus-badge">BONUS 2</span>
+        <div class="pkg-icon">⚔️</div>
+        <h3>SQL Dojo — <span class="count-up" data-target="500">0</span>+ Concept Quiz Questions</h3>
+        <p>The verbal questions interviewers ask before giving you code. RANK vs DENSE_RANK. NULLs in GROUP BY. CTEs vs Subqueries. Know them cold.</p>
+      </div>
+      <div class="pkg-card">
+        <span class="pkg-badge bonus-badge">BONUS 3</span>
+        <div class="pkg-icon">📋</div>
+        <h3>PostgreSQL / MySQL / SQL Server Cheat Sheets</h3>
+        <p>Side-by-side dialect comparison across all three major SQL platforms. Your skills transfer wherever you interview — no friction.</p>
+      </div>
+      <div class="pkg-card">
+        <span class="pkg-badge bonus-badge">BONUS 4</span>
+        <div class="pkg-icon">📚</div>
+        <h3><span class="count-up" data-target="250">0</span>+ Topic-Wise SQL Assignments</h3>
+        <p>Focused practice drills by concept — Joins, Window Functions, CTEs, String Functions, Date Logic. Go deep on one topic before moving on.</p>
+      </div>
+      <div class="pkg-card core">
+        <span class="pkg-badge core-badge">COMMUNITY</span>
+        <div class="pkg-icon">👥</div>
+        <h3>VIP SQL Nexus Community — Lifetime</h3>
+        <p>Your private learning room. Structured, never dead.</p>
+        <div class="pkg-check-list">
+          <div class="pkg-check">Daily Problem of the Day</div>
+          <div class="pkg-check">2× Weekly FAANG Problems — forever</div>
+          <div class="pkg-check">Monthly challenge + quiz</div>
+          <div class="pkg-check">Doubt resolution by Sandipan</div>
+          <div class="pkg-check">Job updates — Indian data roles</div>
+          <div class="pkg-check">Live webinar sessions</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:3rem;" class="anim-up">
+      <a href="#pricing" class="btn-primary">Get Everything — One Payment →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VALUE STACK + PRICING ===== -->
+<section id="pricing" class="section-pad">
+  <div class="container">
+    <div class="anim-up" style="text-align:center;max-width:620px;margin:0 auto 2rem;">
+      <div class="eyebrow">Founding Member Pricing</div>
+      <h2>The Honest Value Breakdown.<br><span class="highlight">Then the Price.</span></h2>
+      <p style="color:var(--text-secondary);margin-top:1rem;line-height:1.75;">Let's be completely transparent about what you're getting before we talk price.</p>
+    </div>
+
+    <div class="value-table-wrap anim-up">
+      <table class="value-table">
+        <thead><tr><th style="width:65%">What You Get</th><th>Standalone Value</th></tr></thead>
+        <tbody>
+          <tr><td>500+ Interview Problems (Lifetime Growing)</td><td class="vt-amount">₹3,499</td></tr>
+          <tr><td>5-Layer Breakdown per Problem + Video Walkthroughs</td><td class="vt-amount">₹2,999</td></tr>
+          <tr><td>Monthly SQL Projects (12–15, Indian Context, Ongoing)</td><td class="vt-amount">₹1,499</td></tr>
+          <tr><td>SQL Dojo — 500+ Concept Quiz Questions</td><td class="vt-amount">₹999</td></tr>
+          <tr><td>PostgreSQL / MySQL / SQL Server Cheat Sheets</td><td class="vt-amount">₹499</td></tr>
+          <tr><td>250+ Topic-Wise SQL Assignments</td><td class="vt-amount">₹799</td></tr>
+          <tr><td>VIP SQL Nexus Community — Lifetime Access</td><td class="vt-amount">₹1,499</td></tr>
+          <tr><td>Daily Problem of the Day (Lifetime)</td><td class="vt-amount">₹699</td></tr>
+          <tr><td>2× Weekly FAANG Problems (Lifetime)</td><td class="vt-amount">₹999</td></tr>
+          <tr><td>Monthly Challenges + Quizzes (Ongoing)</td><td class="vt-amount">₹799</td></tr>
+          <tr><td>Job Updates Feed (Ongoing)</td><td class="vt-amount">₹399</td></tr>
+          <tr class="total-row"><td><strong>TOTAL VALUE</strong></td><td class="vt-total">₹14,689</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="price-hero anim-up">
+      <div class="price-strike">Total value: ₹14,689</div>
+      <div class="price-main">₹4,999</div>
+      <div class="price-saving">You save ₹9,690 — 66% off</div>
+      <p class="price-meta">One-time payment · Lifetime access · No subscriptions · No renewals · No hidden fees</p>
+      <a href="https://dataverseacademy.graphy.com/courses/SQL-Nexus-Pro-Zero-to-Interview-Ready-6a2e40b831501abf9fd137eb" target="_blank" class="btn-final">GET INSTANT ACCESS — ₹4,999 →</a>
+      <p class="refund-note">🛡️ 7-Day Full Refund Policy · No questions asked · Email <a href="mailto:sandipan.coder789@gmail.com">sandipan.coder789@gmail.com</a></p>
+    </div>
+
+    <div class="anim-up" style="background:rgba(245,166,35,0.06);border:1px solid rgba(245,166,35,0.2);border-radius:var(--radius-lg);padding:1.5rem 2rem;margin-top:1.5rem;">
+      <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.75;"><strong style="color:var(--gold);">This is the Batch 1 founding price.</strong> It exists because this is the first cohort — early members are betting on something being built from the ground up. Once Batch 1 closes and results start rolling in, the price increases permanently. There is no coupon that brings it back down. This is the lowest SQL Nexus Pro will ever cost.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WEBINAR BRIDGE ===== -->
+<style>
+@media(max-width:768px){
+  .wb-grid{grid-template-columns:1fr !important}
+  .wb-grid-left{border-right:none !important;border-bottom:1px solid var(--border)}
+}
+</style>
+<section id="webinar-teaser" class="section-pad-sm" style="position:relative;z-index:2;background:linear-gradient(180deg,var(--bg-base) 0%,rgba(29,185,84,0.05) 50%,var(--bg-base) 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div style="max-width:900px;margin:0 auto;">
+
+      <!-- heading -->
+      <div class="anim-up" style="text-align:center;margin-bottom:2.8rem;">
+        <div class="eyebrow">Before You Decide</div>
+        <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:1rem;">
+          Still on the fence?<br>
+          <span class="highlight">Watch real FAANG SQL problems solved live — first.</span>
+        </h2>
+        <p style="color:var(--text-secondary);font-size:0.95rem;line-height:1.8;max-width:640px;margin:0 auto;">
+          SQL Nexus Pro is a deep, lifetime system — 500+ problems, full breakdowns, a growing library. If you're not yet certain that's the right level for where you stand today, there's a smarter first move.
+        </p>
+      </div>
+
+      <!-- two-column card -->
+      <div class="anim-up wb-grid" style="display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(29,185,84,0.28);border-radius:var(--radius-lg);overflow:hidden;background:var(--bg-card);">
+
+        <!-- LEFT — what the webinar is -->
+        <div class="wb-grid-left" style="padding:2.4rem;border-right:1px solid var(--border);">
+          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(29,185,84,0.1);border:1px solid rgba(29,185,84,0.3);border-radius:999px;padding:5px 16px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--green-bright);margin-bottom:1.4rem;">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--green-bright);animation:blink 2s infinite;flex-shrink:0;"></span>
+            SQL CrackCode Live · 2-Day Webinar
+          </div>
+          <h3 style="font-family:var(--font-head);font-size:1.15rem;font-weight:700;color:var(--text-primary);line-height:1.4;margin-bottom:0.9rem;">
+            See 10 real interview problems decoded live.<br>
+            <span style="color:var(--green-bright);">Decide from experience, not from a sales page.</span>
+          </h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.78;margin-bottom:1.6rem;">
+            In two focused live sessions, a Senior Data Engineer solves actual FAANG SQL questions on screen — every trap named, every decision explained out loud. No cuts. No pre-written answers. No polished walkthrough that was always going to be right.
+          </p>
+          <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:2rem;">
+            <div style="display:flex;align-items:flex-start;gap:10px;font-size:0.87rem;color:var(--text-secondary);line-height:1.6;">
+              <span style="color:var(--green-bright);font-weight:700;margin-top:1px;flex-shrink:0;">✓</span>
+              <span>10 verified company SQL problems — Flipkart, Google, Swiggy, Uber &amp; more</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;font-size:0.87rem;color:var(--text-secondary);line-height:1.6;">
+              <span style="color:var(--green-bright);font-weight:700;margin-top:1px;flex-shrink:0;">✓</span>
+              <span>Live Q&amp;A every session — ask questions, challenge approaches, get instant answers</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;font-size:0.87rem;color:var(--text-secondary);line-height:1.6;">
+              <span style="color:var(--green-bright);font-weight:700;margin-top:1px;flex-shrink:0;">✓</span>
+              <span>6 bonus resources delivered the moment you register</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;font-size:0.87rem;color:var(--text-secondary);line-height:1.6;">
+              <span style="color:var(--green-bright);font-weight:700;margin-top:1px;flex-shrink:0;">✓</span>
+              <span>A fraction of the investment — the clearest first step before the full system</span>
+            </div>
+          </div>
+          <a href="../sql-weibnar/index.html" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;font-size:0.95rem;">
+            Explore the Webinar <span>→</span>
+          </a>
+        </div>
+
+        <!-- RIGHT — the reasoning -->
+        <div style="padding:2.4rem;background:rgba(29,185,84,0.025);display:flex;flex-direction:column;justify-content:center;gap:1.2rem;">
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.2rem;">The logic is simple</div>
+
+          <div style="background:rgba(29,185,84,0.06);border:1px solid var(--border);border-radius:var(--radius);padding:1.3rem;">
+            <div style="font-family:var(--font-head);font-size:0.92rem;font-weight:700;color:var(--text-primary);margin-bottom:0.5rem;">After 2 days live with real problems…</div>
+            <div style="font-size:0.84rem;color:var(--text-secondary);line-height:1.72;">You either feel the pattern click — and know exactly why SQL Nexus Pro is the obvious next step. Or you realise you need more fundamentals first. Either outcome puts you on the right path, not the expensive wrong one.</div>
+          </div>
+
+          <div style="background:rgba(245,166,35,0.06);border:1px solid rgba(245,166,35,0.22);border-radius:var(--radius);padding:1.3rem;">
+            <div style="font-family:var(--font-head);font-size:0.92rem;font-weight:700;color:var(--gold);margin-bottom:0.5rem;">Think of it as a paid trailer.</div>
+            <div style="font-size:0.84rem;color:var(--text-secondary);line-height:1.72;">The webinar is a complete, standalone experience — you walk away with real value regardless of what you decide next. But it's also the sharpest signal you'll get of whether the full masterclass is built for where you are right now.</div>
+          </div>
+
+          <div style="border-top:1px solid var(--border);padding-top:1.3rem;">
+            <div style="font-size:0.82rem;color:var(--text-dim);margin-bottom:6px;">Already confident? Ready to go all-in?</div>
+            <a href="#pricing" style="font-family:var(--font-head);font-size:0.88rem;font-weight:600;color:var(--green-bright);text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">
+              Jump straight to SQL Nexus Pro ↑
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPARISON ===== -->
+<section id="compare" class="section-pad">
+  <div class="container">
+    <div class="anim-up" style="text-align:center;max-width:620px;margin:0 auto 2.5rem;">
+      <div class="eyebrow">The Real Comparison</div>
+      <h2>SQL Nexus Pro vs.<br><span class="highlight">Everything Else</span></h2>
+      <p style="color:var(--text-secondary);margin-top:1rem;line-height:1.75;">No vague claims. No marketing language. Just the actual comparison.</p>
+    </div>
+    <div class="compare-table-wrap anim-up">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th class="other">Other Platforms<br><span style="font-size:11px;font-weight:400;color:var(--text-dim);">LeetCode / StrataScratch / Bootcamps</span></th>
+            <th class="ours">SQL Nexus Pro<br><span style="font-size:11px;font-weight:400;">Interview Masterclass</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Pricing</td><td class="other-cell">₹8,000–₹15,000/year — recurring forever</td><td class="ours-cell"><strong style="color:var(--gold);">₹4,999 one-time · own it for life</strong></td></tr>
+          <tr><td>Problem Solutions</td><td class="other-cell">Text-only — just the final query</td><td class="ours-cell">Full 5-layer breakdown — context, thinking, approaches, traps</td></tr>
+          <tr><td>Video Walkthroughs</td><td class="other-cell"><span class="check-no">✗</span> None</td><td class="ours-cell"><span class="check-yes">✓</span> Every problem</td></tr>
+          <tr><td>Problem Updates</td><td class="other-cell"><span class="check-no">✗</span> Static — same problems from 2021</td><td class="ours-cell"><span class="check-yes">✓</span> Lifetime updates — new problems monthly</td></tr>
+          <tr><td>Thinking Breakdown</td><td class="other-cell"><span class="check-no">✗</span> "Here is the answer" — no process</td><td class="ours-cell"><span class="check-yes">✓</span> Brute force → optimized + traps explained</td></tr>
+          <tr><td>Community</td><td class="other-cell"><span class="check-no">✗</span> None or dead forum</td><td class="ours-cell"><span class="check-yes">✓</span> Live community — daily problems, FAANG drops</td></tr>
+          <tr><td>Mock Interviews</td><td class="other-cell"><span class="check-no">✗</span> Not offered</td><td class="ours-cell"><span class="check-yes">✓</span> Live webinar sessions with Sandipan</td></tr>
+          <tr><td>Concept Quizzes</td><td class="other-cell"><span class="check-no">✗</span> Only coding problems</td><td class="ours-cell"><span class="check-yes">✓</span> SQL Dojo — 500+ concept questions</td></tr>
+          <tr><td>Applied Projects</td><td class="other-cell"><span class="check-no">✗</span> No projects</td><td class="ours-cell"><span class="check-yes">✓</span> 12–15 monthly Indian-context projects</td></tr>
+          <tr><td>After you finish</td><td class="other-cell">You're done. Product ends. On your own.</td><td class="ours-cell"><strong style="color:var(--green-bright);">Community runs forever. New problems keep dropping.</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;" class="anim-up">
+      <a href="#pricing" class="btn-primary">Choose the System That Never Goes Stale →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WALL OF RESULTS ===== -->
+<section id="wall" class="section-pad">
+  <div class="container">
+    <div class="anim-up" style="text-align:center;max-width:620px;margin:0 auto 1rem;">
+      <div class="eyebrow">Wall of Results</div>
+      <h2>This Wall Is Empty —<br><span class="highlight">And That's Your Opportunity</span></h2>
+      <p style="color:var(--text-secondary);margin-top:1rem;line-height:1.75;">Three spots. Zero testimonials. Every one of them could be yours.</p>
+    </div>
+    <div class="wall-grid stagger">
+      <div class="wall-card">
+        <div class="wall-num">Featured #1</div>
+        <div class="wall-avatar">?</div>
+        <div class="wall-name">Your Name Here</div>
+        <div class="wall-role">Cracked SQL Round</div>
+        <div class="wall-quote">"How I went from tutorial hell to clearing the SQL round at a product-based company using the 5-layer breakdown method..."</div>
+      </div>
+      <div class="wall-card">
+        <div class="wall-num">Featured #2</div>
+        <div class="wall-avatar">?</div>
+        <div class="wall-name">Your Name Here</div>
+        <div class="wall-role">Landed Data Role</div>
+        <div class="wall-quote">"The structured path and real Indian business datasets made all the difference. I finally understood the <em>thinking</em>, not just the syntax..."</div>
+      </div>
+      <div class="wall-card">
+        <div class="wall-num">Featured #3</div>
+        <div class="wall-avatar">?</div>
+        <div class="wall-name">Your Name Here</div>
+        <div class="wall-role">SQL Confidence Built</div>
+        <div class="wall-quote">"From not knowing window functions to solving Hard-level problems confidently in interviews. The daily habits built by this system changed everything..."</div>
+      </div>
+    </div>
+    <div class="honest-box anim-up">
+      <h3>💎 Here's the honest truth</h3>
+      <p>This is my first online batch. There are no testimonials yet — because no one has gone through this program before you. But here's what <strong>IS</strong> already built and waiting inside:</p>
+      <div class="honest-bullets">
+        <div class="hb">⚡ <span><strong>500+ real interview problems</strong> — Easy to Hard, tagged by company and concept</span></div>
+        <div class="hb">⚡ <span><strong>5-layer breakdown + video walkthrough</strong> for every single problem</span></div>
+        <div class="hb">⚡ <span><strong>SQL Dojo, monthly projects, 250+ assignments</strong> — all ready from day one</span></div>
+        <div class="hb">⚡ <span><strong>Lifetime community</strong> being built from the ground up — you shape it</span></div>
+        <div class="hb">⚡ <span>Monthly quizzes, monthly projects, and content that <strong>keeps growing forever</strong></span></div>
+      </div>
+      <p>If you want to be my <strong style="color:var(--gold);">FIRST testimonial</strong> — the person who cracks an SQL interview at a product-based company using this system and gets featured right here — this is your moment. The first batch doesn't just get the content. <strong>They get to be the proof.</strong> They get the lowest price this will ever have. And they get to say "I was there from day one" — when this wall is full of names, and joining costs twice as much.</p>
+      <a href="#pricing" class="btn-primary">Become a Founding Member — Join Batch 1 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="section-pad">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-img-wrap anim-left">
+        <img src="../assets/profile-headshot.png" alt="Sandipan Mukherjee" class="about-img">
+        <div class="creds">
+          <div class="cred-badge">📊 Data Scientist @ Rakuten</div>
+          <div class="cred-badge">🏢 Sr. Analyst @ WTW</div>
+          <div class="cred-badge">🎓 7+ Years Teaching</div>
+        </div>
+      </div>
+      <div class="about-text anim-right">
+        <div class="eyebrow">The Man Behind the System</div>
+        <h2>Built by Someone Who's<br><span class="highlight">Been on Both Sides</span></h2>
+        <p>I'm <strong>Sandipan Mukherjee</strong>, Founder of DataVerse Academy. My journey started as a Data Science Intern — learning SQL on real business data, not textbook examples. That early gap between knowing SQL and using it became the foundation of everything I teach.</p>
+        <p>I went on to join <strong>Rakuten</strong> as an Analyst/Data Scientist — working with SQL, ETL workflows, and data processing pipelines at scale. Then <strong>WTW</strong>, a global insurance and risk management organization, where I was promoted to <strong>Senior Analyst cum Data Engineer</strong>.</p>
+        <p>Alongside industry work, I've been teaching since my college years — 7+ years, thousands of students, and a front-row seat to watching where candidates break down in SQL interviews.</p>
+        <p>I didn't build SQL Nexus Pro because it was a good product idea. I built it because I kept seeing the same gap: smart people failing SQL rounds <strong>not because they didn't know syntax — but because nobody taught them to think</strong> through a problem the way a professional does.</p>
+        <a href="#pricing" class="btn-primary" style="margin-top:1rem;display:inline-block;">Learn From Someone Who's Done It →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" class="section-pad">
+  <div class="container">
+    <div class="anim-up" style="text-align:center;max-width:560px;margin:0 auto 2rem;">
+      <div class="eyebrow">Got Questions?</div>
+      <h2>Every Objection,<br><span class="highlight">Answered Directly</span></h2>
+    </div>
+    <div class="faq-list" id="faq-list"></div>
+    <div style="text-align:center;margin-top:3rem;" class="anim-up">
+      <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:1rem;">Still unsure? Email before you buy — an honest answer about fit costs nothing.</p>
+      <a href="#pricing" class="btn-primary">Still Unsure? Read the FAQ Above, Then Join →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section id="final-cta">
+  <div class="container">
+    <div class="final-cta-inner">
+      <div class="eyebrow" style="margin:0 auto 1.5rem;">The Decision</div>
+      <h2>Three Months From Now,<br>One of Two Things Is <span class="highlight">True.</span></h2>
+      <p style="color:var(--text-secondary);font-size:1rem;line-height:1.75;margin:1.2rem 0;">Either you went through a structured system, solved real problems with expert breakdowns, built genuine pattern recognition, and walked into your SQL interview <strong>knowing you'd seen this before.</strong></p>
+      <p style="color:var(--text-secondary);font-size:1rem;line-height:1.75;margin-bottom:2rem;">Or you're still watching YouTube videos, still unsure what to study next, and still wondering why a skill you technically know keeps failing you in interviews.</p>
+
+      <div class="final-list anim-up">
+        <div class="fl-item"><span class="fl-check">✓</span> 500+ Real Interview Problems — Lifetime Growing</div>
+        <div class="fl-item"><span class="fl-check">✓</span> Easy → Medium → Hard Progression</div>
+        <div class="fl-item"><span class="fl-check">✓</span> 5-Layer Breakdown + Video Walkthrough per Problem</div>
+        <div class="fl-item"><span class="fl-check">✓</span> SQL Dojo — 500+ Concept Quiz Questions</div>
+        <div class="fl-item"><span class="fl-check">✓</span> 250+ Topic-Wise SQL Assignments</div>
+        <div class="fl-item"><span class="fl-check">✓</span> Monthly Indian-Context Projects (12–15, Ongoing)</div>
+        <div class="fl-item"><span class="fl-check">✓</span> PostgreSQL / MySQL / SQL Server Cheat Sheets</div>
+        <div class="fl-item"><span class="fl-check">✓</span> VIP SQL Nexus Community — Lifetime Access</div>
+        <div class="fl-item"><span class="fl-check">✓</span> Daily Problem + Weekly FAANG Problems — Forever</div>
+        <div class="fl-item"><span class="fl-check">✓</span> 7-Day Full Refund Policy</div>
+      </div>
+
+      <div class="final-price-block">
+        <div class="final-price">₹4,999</div>
+        <div class="final-meta">One-Time Payment · Lifetime Access · Batch 1 Founding Price</div>
+        <a href="https://dataverseacademy.graphy.com/courses/SQL-Nexus-Pro-Zero-to-Interview-Ready-6a2e40b831501abf9fd137eb" target="_blank" class="btn-final">GET INSTANT ACCESS — ₹4,999 →</a>
+      </div>
+
+      <p class="refund-note">🛡️ 7-Day Full Refund · No forms, no friction · <a href="mailto:sandipan.coder789@gmail.com">sandipan.coder789@gmail.com</a></p>
+      <p style="font-size:0.82rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">"The system is built. The problems are loaded. The community is running. The only thing missing is you."</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p>Questions before buying? <a href="mailto:sandipan.coder789@gmail.com">sandipan.coder789@gmail.com</a></p>
+  <p style="margin-top:0.5rem;">© 2026 DataVerse Academy. All rights reserved.</p>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+// ---- COUNTDOWN ----
+(function() {
+  const end = new Date();
+  end.setDate(end.getDate() + 7);
+  function tick() {
+    const now = new Date(), diff = end - now;
+    if (diff <= 0) return;
+    const d = Math.floor(diff/86400000),
+          h = Math.floor((diff%86400000)/3600000),
+          m = Math.floor((diff%3600000)/60000),
+          s = Math.floor((diff%60000)/1000);
+    document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
+// ---- PARTICLES ----
+(function() {
+  const canvas = document.getElementById('particles-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  const isMobile = () => window.innerWidth < 768;
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  function Particle() {
+    this.x = Math.random()*W; this.y = Math.random()*H;
+    this.r = Math.random()*1.5+0.5;
+    this.vx = (Math.random()-.5)*0.3; this.vy = (Math.random()-.5)*0.3;
+    this.alpha = Math.random()*0.4+0.1;
+    this.color = Math.random()>.7 ? '#F5A623' : '#1DB954';
+  }
+  Particle.prototype.update = function() {
+    this.x+=this.vx; this.y+=this.vy;
+    if(this.x<0) this.x=W; if(this.x>W) this.x=0;
+    if(this.y<0) this.y=H; if(this.y>H) this.y=0;
+  };
+  Particle.prototype.draw = function() {
+    ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+    ctx.fillStyle = this.color; ctx.globalAlpha = this.alpha; ctx.fill();
+  };
+  const N = isMobile() ? 30 : 60;
+  for(let i=0;i<N;i++) particles.push(new Particle());
+  function animate() {
+    ctx.clearRect(0,0,W,H); ctx.globalAlpha=1;
+    particles.forEach(p=>{p.update();p.draw();});
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+// ---- CURSOR GLOW ----
+if(window.innerWidth > 768) {
+  const glow = document.getElementById('cursor-glow');
+  document.addEventListener('mousemove', e => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+  });
+}
+
+// ---- SCROLL EFFECTS ----
+const bar = document.getElementById('progress-bar');
+const nav = document.getElementById('navbar');
+const floatCta = document.getElementById('float-cta');
+let heroBottom = 0;
+
+window.addEventListener('scroll', () => {
+  const scroll = window.scrollY, total = document.body.scrollHeight - window.innerHeight;
+  bar.style.width = (scroll/total*100) + '%';
+  if(scroll>80) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+  if(!heroBottom) heroBottom = document.getElementById('hero').offsetHeight;
+  if(scroll > heroBottom*0.6) floatCta.classList.add('show'); else floatCta.classList.remove('show');
+});
+
+// ---- INTERSECTION OBSERVER ----
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      e.target.classList.add('visible');
+      // Counter animation
+      e.target.querySelectorAll('.count-up').forEach(el => {
+        if(el.dataset.counted) return;
+        el.dataset.counted = '1';
+        const target = +el.dataset.target, dur = 1500;
+        const start = Date.now();
+        function step() {
+          const p = Math.min((Date.now()-start)/dur, 1);
+          el.textContent = Math.floor(p * target);
+          if(p<1) requestAnimationFrame(step); else el.textContent = target;
+        }
+        step();
+      });
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.anim-up,.anim-left,.anim-right,.anim-fade,.stagger').forEach(el => io.observe(el));
+
+// Layer items with stagger
+document.querySelectorAll('.layer-item').forEach((el,i) => {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) { setTimeout(()=>e.target.classList.add('visible'), i*120); obs.disconnect(); } });
+  }, {threshold:0.2});
+  obs.observe(el);
+});
+
+// ---- MARQUEE DATA ----
+const companies1 = ['Amazon','Google','Flipkart','Microsoft','Swiggy','Walmart','Zomato','Paytm','HDFC Bank','Ola','Netflix','Adobe','Zerodha','Groww','Atlassian','Salesforce','ICICI Bank','MakeMyTrip'];
+const companies2 = ['JP Morgan','Goldman Sachs','Pinterest','Reddit','Snapchat','Uber','PayPal','Spotify','IBM','Nykaa','BigBasket','Practo','IRCTC','PhonePe','Tata Motors','Mahindra','Shopify','LinkedIn'];
+function buildMarquee(ids, companies) {
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    companies.forEach(c => {
+      const span = document.createElement('span');
+      span.className = 'co-tag';
+      span.innerHTML = `<span class="co-dot"></span>${c}`;
+      el.appendChild(span);
+    });
+  });
+}
+buildMarquee(['m1','m2'], companies1);
+buildMarquee(['m3','m4'], companies2);
+
+// ---- PROBLEMS DATA ----
+const problems = [
+  ["Festive Season Spike","Flipkart","Hard","Aggregation & Grouping"],
+  ["Subscription Churn Window","Spotify","Hard","Window Functions"],
+  ["Loyal Customer Streaks","Swiggy","Hard","Window Functions"],
+  ["Cart Abandonment Patterns","Amazon","Medium","Joins & Multi-Table Logic"],
+  ["Driver Idle Time Analysis","Uber","Hard","Date & Time Analysis"],
+  ["Top SKU By Region","Walmart","Medium","Ranking & Top-N"],
+  ["Refund Vs Order Ratio","Myntra","Hard","Aggregation & Grouping"],
+  ["Late Delivery Penalty","Zomato","Hard","Subqueries & CTEs"],
+  ["Duplicate Transaction Detection","PayPal","Hard","Set Operations"],
+  ["Manager Reporting Chain","LinkedIn","Hard","Recursive Queries"],
+  ["Peak Hour Ride Requests","Ola","Medium","Window Functions"],
+  ["Quarterly Retention Cohorts","Netflix","Hard","Cohort & Funnel Analysis"],
+  ["Price Drop Impact Analysis","Meta","Hard","Running Totals & Trends"],
+  ["Weekend Vs Weekday Spend","Visa","Medium","Aggregation & Grouping"],
+  ["Inventory Aging Report","IBM","Hard","Date & Time Analysis"],
+  ["Cross-Sell Opportunity Score","Microsoft","Hard","Joins & Multi-Table Logic"],
+  ["Influencer Campaign ROI","Google","Medium","Subqueries & CTEs"],
+  ["Frequent Flyer Tier Upgrade","IRCTC","Hard","Window Functions"],
+  ["Hotel Booking Cancellation Trends","MakeMyTrip","Medium","Aggregation & Grouping"],
+  ["Wallet Balance Reconciliation","Paytm","Hard","Set Operations"],
+  ["UPI Failed Transaction Spike","PhonePe","Hard","Date & Time Analysis"],
+  ["Brokerage Fee Leakage","Zerodha","Hard","Subqueries & CTEs"],
+  ["Mutual Fund SIP Drop-Off","Groww","Medium","Cohort & Funnel Analysis"],
+  ["Skincare Repeat Purchase Rate","Nykaa","Medium","Aggregation & Grouping"],
+  ["Grocery Delivery SLA Breach","BigBasket","Hard","Date & Time Analysis"],
+  ["Course Completion Funnel","Byju's","Hard","Cohort & Funnel Analysis"],
+  ["Doctor Appointment No-Show Rate","Practo","Medium","Aggregation & Grouping"],
+  ["Credit Card Reward Point Expiry","American Express","Hard","Date & Time Analysis"],
+  ["Fraud Ring Detection","Mastercard","Hard","Recursive Queries"],
+  ["Seller Rating Drift Over Time","eBay","Hard","Window Functions"],
+  ["Multi-Currency Order Reconciliation","Shopify","Hard","Joins & Multi-Table Logic"],
+  ["Trending Hashtag Lifespan","X (Twitter)","Medium","Window Functions"],
+  ["Story View Drop-Off Points","Snapchat","Hard","Cohort & Funnel Analysis"],
+  ["Pin Save-to-Click Ratio","Pinterest","Medium","Aggregation & Grouping"],
+  ["Subreddit Engagement Spike","Reddit","Hard","Running Totals & Trends"],
+  ["Hotel Overbooking Risk Score","Booking.com","Hard","Subqueries & CTEs"],
+  ["Vehicle Service Overdue Alerts","Tata Motors","Medium","Date & Time Analysis"],
+  ["Dealer-Wise Sales Variance","Mahindra","Hard","Ranking & Top-N"],
+  ["Loan EMI Default Pattern","ICICI Bank","Hard","Window Functions"],
+  ["Account Dormancy Detection","HDFC Bank","Medium","NULL Handling & Data Cleaning"],
+  ["Branch-Wise Transaction Heatmap","SBI","Hard","Pivoting & Conditional Logic"],
+  ["Trading Volume Spike Detector","Goldman Sachs","Hard","Running Totals & Trends"],
+  ["Portfolio Rebalancing Trigger","JP Morgan","Hard","Subqueries & CTEs"],
+  ["Org Chart Depth Finder","Atlassian","Hard","Hierarchical Data"],
+  ["Sprint Velocity Drop Alert","Salesforce","Medium","Aggregation & Grouping"],
+  ["App Crash Correlation by OS Version","Adobe","Hard","Joins & Multi-Table Logic"],
+  ["Multi-City Surge Pricing Pattern","Ola Electric","Medium","Window Functions"],
+  ["Same-Day Cancellation Refund Lag","Dunzo","Hard","Date & Time Analysis"]
+];
+
+const PREVIEW_LIMIT = 6;
+let activeDiff = 'All', activeCat = 'All', expanded = false;
+
+const allCats = [...new Set(problems.map(p=>p[3]))].sort();
+const catBtns = document.getElementById('cat-btns');
+const allCatBtn = document.createElement('button');
+allCatBtn.className = 'pill-btn active'; allCatBtn.textContent = 'All'; allCatBtn.onclick = () => filterProblems('cat','All',allCatBtn);
+catBtns.appendChild(allCatBtn);
+allCats.forEach(c => {
+  const b = document.createElement('button');
+  b.className = 'pill-btn'; b.textContent = c;
+  b.onclick = () => filterProblems('cat',c,b);
+  catBtns.appendChild(b);
+});
+
+function filterProblems(type, val, btn) {
+  if(type==='diff') {
+    activeDiff = val;
+    document.querySelectorAll('#preview .pc-group:first-child .pill-btn').forEach(b => {
+      b.className = 'pill-btn';
+      if(b.textContent===val) b.classList.add(val==='All'?'active':val==='Easy'?'active-easy':val==='Medium'?'active-medium':'active-hard');
+    });
+  } else {
+    activeCat = val;
+    document.querySelectorAll('#cat-btns .pill-btn').forEach(b => {
+      b.className = 'pill-btn'; if(b===btn) b.classList.add('active');
+    });
+  }
+  expanded = false;
+  document.getElementById('see-more-btn').style.display = '';
+  document.getElementById('see-less-btn').style.display = 'none';
+  document.getElementById('table-fade-wrap').classList.remove('expanded');
+  renderProblems();
+}
+
+function renderProblems() {
+  const filtered = problems.filter(p =>
+    (activeDiff==='All'||p[2]===activeDiff) && (activeCat==='All'||p[3]===activeCat)
+  );
+  const tbody = document.getElementById('problems-tbody');
+  const count = document.getElementById('preview-count');
+  const show = expanded ? filtered.length : Math.min(PREVIEW_LIMIT, filtered.length);
+  count.textContent = `Showing ${show} of ${filtered.length} problems`;
+
+  if(!filtered.length) {
+    tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--text-dim);">No problems match this filter.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = filtered.map((p,i) => {
+    const dc = p[2]==='Easy'?'badge-easy':p[2]==='Medium'?'badge-medium':'badge-hard';
+    const hidden = !expanded && i >= PREVIEW_LIMIT ? 'class="hidden-row"' : '';
+    return `<tr ${hidden} style="animation:fadeRowIn 0.3s ease ${(i%PREVIEW_LIMIT)*40}ms both">
+      <td style="font-weight:500;">${p[0]}</td>
+      <td style="color:var(--text-dim);font-size:12px;">${p[1]}</td>
+      <td><span class="badge ${dc}">${p[2]}</span></td>
+      <td><span class="cat-chip">${p[3]}</span></td>
+    </tr>`;
+  }).join('');
+
+  const seeMore = document.getElementById('see-more-btn');
+  const seeLess = document.getElementById('see-less-btn');
+  if(filtered.length <= PREVIEW_LIMIT || expanded) { seeMore.style.display='none'; }
+  else { seeMore.style.display=''; seeMore.querySelector('span').textContent=`See All ${filtered.length} Problems`; }
+  seeLess.style.display = expanded && filtered.length > PREVIEW_LIMIT ? '' : 'none';
+}
+
+function showMore() {
+  expanded = true;
+  document.getElementById('table-fade-wrap').classList.add('expanded');
+  renderProblems();
+  document.getElementById('see-more-btn').style.display = 'none';
+  document.getElementById('see-less-btn').style.display = '';
+}
+
+function showLess() {
+  expanded = false;
+  document.getElementById('table-fade-wrap').classList.remove('expanded');
+  renderProblems();
+  document.getElementById('see-more-btn').style.display = '';
+  document.getElementById('see-less-btn').style.display = 'none';
+  // Smooth scroll back to section
+  document.getElementById('preview').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+renderProblems();
+
+// ---- TABS ----
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ---- FAQ ----
+const faqs = [
+  ["I'm a complete beginner. Is this too advanced for me?", "The Easy tier is designed for candidates who know basic SQL — SELECT and a basic JOIN. If you're at absolute zero, spend two weeks with free resources first to get the fundamentals, then come here. The 5-layer breakdown means you're never thrown in without context."],
+  ["I've been writing SQL for 2–3 years. Will I actually learn anything?", "Almost certainly yes — in ways you don't expect. The Medium and Hard tiers regularly expose gaps in experienced candidates that no amount of daily querying at work would surface. The trap explanations and optimization breakdowns are where 2–3 year professionals find genuine growth."],
+  ["How is this different from just grinding LeetCode SQL problems?", "LeetCode gives you a problem and an answer. SQL Nexus Pro gives you a problem, the thinking process, two approaches, the common mistakes, a video walkthrough, and a community to discuss it with. The difference is not the problem — it's everything around the problem."],
+  ["What SQL dialect does this course use?", "Problems and breakdowns are primarily in T-SQL (SQL Server). The PostgreSQL, MySQL, and SQL Server cheat sheets give you side-by-side syntax references for every major concept so you can transfer to whatever dialect your target company uses."],
+  ["What if I buy this and the content goes stale?", "It can't. Lifetime updates mean new problems are added continuously. The community runs daily problems indefinitely. This is the only SQL prep resource that gets more valuable over time, not less."],
+  ["What if I get stuck on a problem?", "That's exactly what the VIP SQL Nexus Community is for. Post your attempt in the Course Doubts channel, share where your thinking broke down, and get specific help — not generic advice. Sandipan reviews key threads regularly. You will never be stuck alone."],
+  ["The ₹4,999 is a one-time payment — what does 'lifetime' actually mean?", "It means exactly what it says. One payment and you have access to the course, all future problem additions, all future bonus updates, and the VIP community for as long as SQL Nexus Pro exists. No annual renewal. No tier upgrade. Lifetime."],
+  ["What if I buy this and decide it's not right for me?", "You have 7 days from purchase to request a full refund — no forms, no friction, no questions. Email sandipan.coder789@gmail.com and it's done. If you're unsure whether this fits your level, email before buying — an honest answer costs nothing."]
+];
+
+const faqList = document.getElementById('faq-list');
+faqs.forEach(([q,a]) => {
+  const item = document.createElement('div');
+  item.className = 'faq-item';
+  item.innerHTML = `
+    <button class="faq-q">
+      <span>${q}</span>
+      <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <div class="faq-a"><div class="faq-a-inner">${a}</div></div>`;
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const open = item.classList.toggle('open');
+    const ans = item.querySelector('.faq-a');
+    ans.style.maxHeight = open ? ans.scrollHeight + 'px' : '0';
+  });
+  faqList.appendChild(item);
+});
+
+// Row fade keyframe
+const style = document.createElement('style');
+style.textContent = '@keyframes fadeRowIn{from{opacity:0;transform:translateX(-10px);}to{opacity:1;transform:translateX(0);}}';
+document.head.appendChild(style);
+</script>
+</body>
+</html>
